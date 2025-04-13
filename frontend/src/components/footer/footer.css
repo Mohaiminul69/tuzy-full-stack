@@ -1,0 +1,48 @@
+.footerLogo {
+    width: 150px;
+  }
+  .bgBlack {
+    background: #1b1b1b;
+  }
+  
+  .list {
+    list-style: none;
+    padding-left: 0;
+  }
+  .list li {
+    text-transform: capitalize;
+  }
+  .list li a {
+    color: white;
+    text-decoration: none;
+  }
+  .gallary img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .worldMap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .gallary-div {
+    height: 300px;
+  }
+  .follow-links {
+    display: flex;
+    list-style: none;
+  }
+  .follow-links {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+  }
+  .follow-links li {
+    margin-right: 20px;
+  }
+  .follow-links li a {
+    color: white;
+  }

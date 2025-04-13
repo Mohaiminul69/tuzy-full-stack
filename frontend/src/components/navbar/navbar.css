@@ -1,0 +1,22 @@
+.logo {
+    width: 70px;
+  }
+  .signUp {
+    background: crimson;
+    border-radius: 25px;
+    padding: 5px 20px !important;
+    color: white !important;
+  }
+  /* .customNav {
+    background: rgba(27, 27, 27, 0);
+  } */
+  .navLink {
+    color: white !important;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+  .displayPic {
+    width: 40px;
+    border: 2px solid white;
+    border-radius: 50%;
+  }
