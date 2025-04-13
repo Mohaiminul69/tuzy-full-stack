@@ -5,17 +5,18 @@ export const apiSlice = createApi({
   reducerPath: "api", // optional, just the key in your store
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/api/" }),
   endpoints: (builder) => ({
-    getPing: builder.query({
-      query: () => "ping", // GET /api/ping
+    getDestinations: builder.query({
+      query: () => "destinations", // GET /api/ping
     }),
-    createPost: builder.mutation({
-      query: (newPost) => ({
-        url: "/posts",
+    createDestination: builder.mutation({
+      query: (destination) => ({
+        url: "destinations",
         method: "POST",
-        body: newPost,
+        body: destination,
       }),
     }),
   }),
 });
 
-export const { useGetPingQuery, useCreatePostMutation } = apiSlice;
+export const { useGetDestinationsQuery, useCreateDestinationMutation } =
+  apiSlice;

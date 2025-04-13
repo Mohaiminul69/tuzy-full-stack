@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Fragment } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
@@ -6,26 +6,25 @@ import { Link, NavLink } from "react-router-dom";
 import "./navbar.css";
 
 const Header = () => {
-  //   const { user, logOut } = useAuth();
+  // const { user, logOut } = useAuth();
   const user = () => {};
   const logOut = () => {};
+  const customNav = useRef(null);
 
-  const nav = document.querySelector(".customNav");
-  if (nav) {
-    document.addEventListener("scroll", () => {
-      var scrollPos = window.scrollY;
-      if (scrollPos > 70) {
-        nav.style.background = "rgba(27, 27, 27, 0.95)";
-      } else {
-        nav.style.background = "transparent";
-      }
-    });
-  }
+  useEffect(() => {
+    const handleScroll = () =>
+      (customNav.current.style.background =
+        window.scrollY > 70 ? "rgba(27, 27, 27, 0.95)" : "transparent");
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <Fragment>
       <Navbar
         fixed="top"
-        className="customNav"
+        ref={customNav}
         variant="light"
         collapseOnSelect
         expand="lg"

@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+.customHorizontalLine {
+    height: 3px;
+    background: crimson;
+    width: 140px;
+    position: relative;
+    z-index: 1;
+  }
+  .customHorizontalLine::after,
+  .customHorizontalLine::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 150%;
+    height: 100%;
+    z-index: -1;
+    background: rgba(220, 20, 60, 0.8);
+    border-radius: 50%;
+  }
+  .bgGrey {
+    background: #c8c6c6;
+  }
