@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const ModalAlert = ({ showAlert, closeAlert, alertText }) => {
+const AlertModal = ({ showAlert, closeAlert, alertText }) => {
   return (
     <Modal show={showAlert} onHide={closeAlert} centered>
       <Modal.Header closeButton>
@@ -19,4 +19,4 @@ const ModalAlert = ({ showAlert, closeAlert, alertText }) => {
   );
 };
 
-export default ModalAlert;
+export default AlertModal;

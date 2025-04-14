@@ -1,41 +1,51 @@
 import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ModalAlert from "../modals/alert-modal";
-import "./destination-form.css";
 import {
   useCreateDestinationMutation,
-  useGetDestinationsQuery,
+  useGetSingleDestinationQuery,
+  useUpdateDestinationMutation,
 } from "../../api";
+import "./destination-form.css";
 
 const DestinationForm = () => {
   // Alert Modal
   // Alert Modal
+  const { id } = useParams();
   const [alertText, setAlertText] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const closeAlert = () => setShowAlert(false);
   const handleAlert = () => setShowAlert(true);
   const [createDestination] = useCreateDestinationMutation();
-  const { data } = useGetDestinationsQuery();
-  console.log("🚀 ~ DestinationForm ~ data:", data);
+  const [updateDestination] = useUpdateDestinationMutation();
+  const { data = {}, isFetching } = useGetSingleDestinationQuery(id, {
+    skip: !id,
+  });
+  const { name, description, short_description, price, img_src } =
+    data?.destination || {};
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: data?.destination });
+  const callback = id ? updateDestination : createDestination;
 
   const onSubmit = (data) => {
-    console.log("🚀 ~ onSubmit ~ data:", data);
     const formdata = new FormData();
 
     formdata.append("name", data?.name);
     formdata.append("description", data?.description);
+    formdata.append("short_description", data?.short_description);
     formdata.append("price", data?.price);
     formdata.append("img_src", data?.img_src);
 
-    createDestination(formdata)
+    const formDataObj = { payload: formdata };
+    if (id) formDataObj.id = id;
+
+    callback(formDataObj)
       .unwrap()
       .then((res) => res.json())
       .then((data) => {
@@ -46,6 +56,9 @@ const DestinationForm = () => {
         }
       });
   };
+
+  if (isFetching) return "Hello Loader";
+
   return (
     <div className="bgAddTour py-5">
       <h1 className="display-2 mt-5">Add Tour</h1>
@@ -62,6 +75,7 @@ const DestinationForm = () => {
                 Please fill up the form to Add Tour
               </h6>
               <input
+                defaultValue={name}
                 {...register("name", { required: true })}
                 placeholder="Tour/Package Name"
                 className="form-control mb-3"
@@ -71,22 +85,26 @@ const DestinationForm = () => {
                 <option value="package">Package</option>
               </select> */}
               <input
+                defaultValue={price}
                 {...register("price", { required: true })}
                 placeholder="Tour/Package Price"
                 className="form-control mb-3"
                 type="number"
               />
-              {/* <input
-                {...register("shortDescription", { required: true })}
+              <input
+                defaultValue={short_description}
+                {...register("short_description", { required: true })}
                 placeholder="Short Description"
                 className="form-control mb-3"
-              /> */}
+              />
               <input
+                defaultValue={description}
                 {...register("description", { required: true })}
                 placeholder="Description"
                 className="form-control mb-3"
               />
               <input
+                defaultValue={img_src}
                 {...register("img_src", { required: true })}
                 placeholder="Tour/Package Image URL"
                 className="form-control mb-3"
