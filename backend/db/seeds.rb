@@ -66,3 +66,45 @@ destinations.each do |destination|
 end
 
 puts "✅ Seeded #{Destination.count} destinations"
+
+
+gallary_images = [
+  {
+    "key": 1,
+    "img": "https://i.ibb.co/jR5dSWj/ashraful-pranto-cnbw-Gzh-Y-jk-unsplash.jpg"
+  },
+  {
+    "key": 2,
+    "img": "https://i.ibb.co/zmHw3d2/pexels-nikita-khandelwal-800532.jpg"
+  },
+  {
+    "key": 3,
+    "img": "https://i.ibb.co/86prszs/pexels-timur-kozmenko-2474689.jpg"
+  },
+  {
+    "key": 4,
+    "img": "https://i.ibb.co/tpKVHPN/pexels-artem-beliaikin-853199.jpg"
+  },
+  {
+    "key": 5,
+    "img": "https://i.ibb.co/6XD8HKF/pexels-pixabay-258196.jpg"
+  },
+  {
+    "key": 6,
+    "img": "https://i.ibb.co/JryB98D/15-155705-taj-mahal-india-travel-destinations-architecture-taj-mahal.jpg"
+  },
+  {
+    "key": 7,
+    "img": "https://i.ibb.co/StjJyYg/pexels-davi-pimentel-2064827.jpg"
+  },
+  {
+    "key": 8,
+    "img": "https://i.ibb.co/q14zSQh/pexels-amine-m-siouri-2055556.jpg"
+  }
+]
+
+gallary_images.each do |img|
+  GallaryImage.create!(img_src: img[:img])
+end
+
+puts "✅ Seeded #{GallaryImage.count} gallary_images"

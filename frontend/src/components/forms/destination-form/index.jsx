@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
-import ModalAlert from "../modals/alert-modal";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import ModalAlert from "../../modals/alert-modal";
 import {
   useCreateDestinationMutation,
   useGetSingleDestinationQuery,
   useUpdateDestinationMutation,
-} from "../../api";
-import "./destination-form.css";
+} from "../../../api/destinations";
+import "../form.css";
 
 const DestinationForm = () => {
   // Alert Modal
   // Alert Modal
+  const navigate = useNavigate();
   const { id } = useParams();
   const [alertText, setAlertText] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-  const closeAlert = () => setShowAlert(false);
+  const closeAlert = () => {
+    setShowAlert(false);
+    navigate("/");
+  };
   const handleAlert = () => setShowAlert(true);
   const [createDestination] = useCreateDestinationMutation();
   const [updateDestination] = useUpdateDestinationMutation();
@@ -47,13 +51,10 @@ const DestinationForm = () => {
 
     callback(formDataObj)
       .unwrap()
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          setAlertText("Tour Created");
-          handleAlert();
-          reset();
-        }
+      .then(() => {
+        setAlertText("Tour Created");
+        handleAlert();
+        reset();
       });
   };
 

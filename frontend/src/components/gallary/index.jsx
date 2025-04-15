@@ -1,21 +1,16 @@
-import React from "react";
 import { Container, Spinner } from "react-bootstrap";
 import Slider from "react-slick";
-import { useGetDestinationsQuery } from "../../api/destinations";
-import DestinationCard from "./destination-card";
-import "./destination.css";
+import { useGetAllGallaryImagesQuery } from "../../api/gallary-images";
+import "./gallary-images.css";
 
-const Destinations = () => {
+const Gallary = () => {
+  const { data: images, isFetching } = useGetAllGallaryImagesQuery();
   /*
-<---------------------------- Fetching Tour Data from database ---------------------------->
+<---------------------------- Fetching Gallary Image URL's from database ---------------------------->
 */
-  const { data: locations, isFetching } = useGetDestinationsQuery();
-  /*
-<---------------------------- Slider Data ---------------------------->
-*/
+
   const settings = {
-    arrows: true,
-    dots: true,
+    arrows: false,
     infinite: true,
     centerMode: false,
     speed: 500,
@@ -26,7 +21,7 @@ const Destinations = () => {
       {
         breakpoint: 1250,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 6,
           arrows: true,
           slidesToScroll: 1,
           infinite: true,
@@ -37,7 +32,6 @@ const Destinations = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 4,
-          arrows: true,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -59,14 +53,6 @@ const Destinations = () => {
         },
       },
       {
-        breakpoint: 540,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 2,
-        },
-      },
-      {
         breakpoint: 414,
         settings: {
           slidesToShow: 1,
@@ -78,28 +64,30 @@ const Destinations = () => {
   };
   if (isFetching) {
     return (
-      <div className="bgGrey">
+      <div className="bgGrey pt-5">
         <Container className="p-5 text-center">
           <div className="customHorizontalLine"></div>
-          <h1 className="fw-light text-uppercase mt-4 mb-3">Popular Tours</h1>
+          <h1 className="fw-light text-uppercase my-4">Gallary</h1>
           <Spinner animation="border" variant="danger" />;
         </Container>
       </div>
     );
   }
   return (
-    <div className="bgGrey">
-      <Container className="p-5">
+    <div className="bgGrey pt-5">
+      <Container className="px-5">
         <div className="customHorizontalLine"></div>
-        <h1 className="fw-light text-uppercase mt-4 mb-3">Popular Tours</h1>
-        <Slider {...settings}>
-          {locations?.map((location) => (
-            <DestinationCard key={location._id} location={location} />
-          ))}
-        </Slider>
+        <h1 className="fw-light text-uppercase my-4">Gallary</h1>
       </Container>
+      <Slider {...settings}>
+        {images.map(({ img_src, id }) => (
+          <div key={id} className="gallaryImgDiv">
+            <img src={img_src} alt="" />
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };
 
-export default Destinations;
+export default Gallary;

@@ -6,7 +6,7 @@ import AlertModal from "../modals/alert-modal";
 import {
   useDeleteDestinationMutation,
   useGetDestinationsQuery,
-} from "../../api";
+} from "../../api/destinations";
 import "./delete-destination.css";
 
 const DeleteDestination = () => {

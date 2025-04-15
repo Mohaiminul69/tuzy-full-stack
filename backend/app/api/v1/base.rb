@@ -4,5 +4,6 @@ module V1
     format :json
 
     mount V1::Destinations
+    mount V1::GallaryImages
   end
 end

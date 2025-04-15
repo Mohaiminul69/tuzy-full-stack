@@ -3,6 +3,7 @@ import Header from "../../components/navbar/index";
 import Banner from "../../components/banner/index";
 import Footer from "../../components/footer/index";
 import Destinations from "../../components/destinations/list";
+import Gallary from "../../components/gallary";
 
 const HomePage = () => {
   return (
@@ -10,6 +11,7 @@ const HomePage = () => {
       <Header />
       <Banner />
       <Destinations />
+      <Gallary />
       <Footer />
     </div>
   );
