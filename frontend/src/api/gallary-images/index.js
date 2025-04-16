@@ -6,15 +6,33 @@ const gallaryImages = apiSlice.injectEndpoints({
       query: () => "gallary_images",
       providesTags: ["GallaryImage"],
     }),
+    getSingleGallaryImage: builder.query({
+      query: (id) => ({
+        url: `gallary_images/${id}`,
+      }),
+    }),
     createGallaryImage: builder.mutation({
       query: ({ payload }) => ({
         url: "gallary_images",
         method: "POST",
         body: payload,
       }),
+      invalidatesTags: ["GallaryImage"],
+    }),
+    updateGallaryImage: builder.mutation({
+      query: ({ id, payload }) => ({
+        url: `gallary_images/${id}`,
+        method: "PUT",
+        body: payload,
+      }),
+      invalidatesTags: ["GallaryImage"],
     }),
   }),
 });
 
-export const { useGetAllGallaryImagesQuery, useCreateGallaryImageMutation } =
-  gallaryImages;
+export const {
+  useGetAllGallaryImagesQuery,
+  useGetSingleGallaryImageQuery,
+  useCreateGallaryImageMutation,
+  useUpdateGallaryImageMutation,
+} = gallaryImages;

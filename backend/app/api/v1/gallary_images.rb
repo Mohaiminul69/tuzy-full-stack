@@ -8,6 +8,20 @@ module V1
                 GallaryImage.all     
             end
 
+            desc "Get single gallary image"
+            params do
+                requires :id, type: Integer
+            end
+            get ':id' do
+                gallary_image = GallaryImage.find_by(id: params[:id])
+
+                if gallary_image
+                    { message: "Gallary image found successfully", gallary_image: gallary_image }
+                else
+                    error!({ message: "Gallary image not found" }, 404)
+                end
+            end
+
             desc "Create a gallary images"
             params do
                 requires :img_src, type: String
@@ -19,6 +33,24 @@ module V1
                     { message: "Gallary image created successfully", gallary_image: gallary_image }
                 else
                     error!({ message: "Failed to create a gallary image" }, 422)
+                end
+            end
+
+            desc "Update a gallary image"
+            params do
+                requires :img_src, type: String
+            end
+            put ':id' do
+                gallary_image = GallaryImage.find_by(id: params[:id])
+
+                if gallary_image
+                    if gallary_image.update(declared(params, include_missing: false).except(:id))
+                        { message: "Gallary image updated successfully", gallary_image: gallary_image }
+                    else
+                        error!({ message: "Failed to update the gallay image", errors: gallary_image.errors.full_messages }, 422)
+                    end
+                else
+                    error!({ message: "Gallary image not found" }, 404)
                 end
             end
         end
