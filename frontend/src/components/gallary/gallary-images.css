@@ -1,5 +1,15 @@
-.gallaryImgDiv img {
+.gallary-img-div {
+  overflow: hidden;
+  transition: 0.8s;
+}
+
+.gallary-img-div img {
   width: 100%;
   height: 200px;
   object-fit: cover;
+}
+
+.gallary-img-div:hover img {
+  transform: scale(1.2);
+  transition: 0.8s;
 }

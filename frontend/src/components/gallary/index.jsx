@@ -4,7 +4,7 @@ import { useGetAllGallaryImagesQuery } from "../../api/gallary-images";
 import "./gallary-images.css";
 
 const Gallary = () => {
-  const { data: images, isFetching } = useGetAllGallaryImagesQuery();
+  const { data: images = [], isFetching } = useGetAllGallaryImagesQuery();
   /*
 <---------------------------- Fetching Gallary Image URL's from database ---------------------------->
 */
@@ -64,9 +64,9 @@ const Gallary = () => {
   };
   if (isFetching) {
     return (
-      <div className="bgGrey pt-5">
+      <div className="bg-grey pt-5">
         <Container className="p-5 text-center">
-          <div className="customHorizontalLine"></div>
+          <div className="custom-horizontal-line" />
           <h1 className="fw-light text-uppercase my-4">Gallary</h1>
           <Spinner animation="border" variant="danger" />;
         </Container>
@@ -74,14 +74,14 @@ const Gallary = () => {
     );
   }
   return (
-    <div className="bgGrey pt-5">
+    <div className="bg-grey pt-5">
       <Container className="px-5">
-        <div className="customHorizontalLine"></div>
+        <div className="custom-horizontal-line"></div>
         <h1 className="fw-light text-uppercase my-4">Gallary</h1>
       </Container>
       <Slider {...settings}>
         {images.map(({ img_src, id }) => (
-          <div key={id} className="gallaryImgDiv">
+          <div key={id} className="gallary-img-div">
             <img src={img_src} alt="" />
           </div>
         ))}

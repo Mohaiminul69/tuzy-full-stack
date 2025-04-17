@@ -9,7 +9,7 @@ const Destinations = () => {
   /*
 <---------------------------- Fetching Tour Data from database ---------------------------->
 */
-  const { data: locations, isFetching } = useGetDestinationsQuery();
+  const { data: locations = [], isFetching } = useGetDestinationsQuery();
   /*
 <---------------------------- Slider Data ---------------------------->
 */
@@ -76,21 +76,23 @@ const Destinations = () => {
       },
     ],
   };
+
   if (isFetching) {
     return (
-      <div className="bgGrey">
+      <div className="bg-grey">
         <Container className="p-5 text-center">
-          <div className="customHorizontalLine"></div>
+          <div className="custom-horizontal-line"></div>
           <h1 className="fw-light text-uppercase mt-4 mb-3">Popular Tours</h1>
           <Spinner animation="border" variant="danger" />;
         </Container>
       </div>
     );
   }
+
   return (
-    <div className="bgGrey">
+    <div className="bg-grey">
       <Container className="p-5">
-        <div className="customHorizontalLine"></div>
+        <div className="custom-horizontal-line"></div>
         <h1 className="fw-light text-uppercase mt-4 mb-3">Popular Tours</h1>
         <Slider {...settings}>
           {locations?.map((location) => (
