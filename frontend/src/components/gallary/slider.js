@@ -63,7 +63,7 @@ export const handleSlider = () => {
       updateImages(currentIndex);
     },
     x: `-${currentIndex * 11.1111}%`,
-    duration: 2,
+    duration: 1.5,
     ease: '"power4.out"',
   });
 };
