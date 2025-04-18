@@ -7,7 +7,7 @@ import Gallary from "../../components/gallary";
 
 const HomePage = () => {
   return (
-    <div className="bg-[#c8c6c6] h-screen text-white capitalize">
+    <div className="background-grey h-screen text-white capitalize">
       <Header />
       <Banner />
       <Destinations />

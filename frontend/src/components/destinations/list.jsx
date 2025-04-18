@@ -79,7 +79,7 @@ const Destinations = () => {
 
   if (isFetching) {
     return (
-      <div className="bg-grey">
+      <div className="background-grey">
         <Container className="p-5 text-center">
           <div className="custom-horizontal-line"></div>
           <h1 className="fw-light text-uppercase mt-4 mb-3">Popular Tours</h1>
@@ -90,7 +90,7 @@ const Destinations = () => {
   }
 
   return (
-    <div className="bg-grey">
+    <div className="background-grey">
       <Container className="p-5">
         <div className="custom-horizontal-line"></div>
         <h1 className="fw-light text-uppercase mt-4 mb-3">Popular Tours</h1>

@@ -5,12 +5,12 @@ import "./footer.css";
 
 const Footer = () => {
   return (
-    <div className="bgBlack text-white pt-5 pb-4">
+    <div className="background-dark text-white pt-5 pb-4">
       <Container>
         <Row>
           <Col sm={12} md={6} lg={3} className="mb-4">
             <img
-              className="footerLogo"
+              className="footer-logo"
               src="https://i.ibb.co/2tD3QrN/logo.png"
               alt=""
             />
@@ -97,14 +97,14 @@ const Footer = () => {
             </div>
           </Col>
           <Col sm={12} md={6} lg={3} className="flex align-items-start mb-4">
-            <div className="worldMap footer-bottom-div mt-3">
+            <div className="world-map footer-bottom-div mt-3">
               <h5 className="mb-3">World Wide Tour</h5>
               <img src="https://i.ibb.co/S7ZjSDp/988914939-PO-big.jpg" alt="" />
             </div>
           </Col>
         </Row>
         <div className="flex justify-center mt-2">
-          <p className="text-center">
+          <p className="text-center text-xs">
             Site managed by Tuzy.co. Copyright &copy; Tuzy.co Limited 2021. All
             rights reserved.
           </p>

@@ -1,13 +1,11 @@
 import { Container, Spinner } from "react-bootstrap";
 import Slider from "react-slick";
 import { useGetAllGallaryImagesQuery } from "../../api/gallary-images";
+import SplitSlider from "./split-slider";
 import "./gallary-images.css";
 
 const Gallary = () => {
   const { data: images = [], isFetching } = useGetAllGallaryImagesQuery();
-  /*
-<---------------------------- Fetching Gallary Image URL's from database ---------------------------->
-*/
 
   const settings = {
     arrows: false,
@@ -62,9 +60,10 @@ const Gallary = () => {
       },
     ],
   };
+
   if (isFetching) {
     return (
-      <div className="bg-grey pt-5">
+      <div className="background-grey pt-5">
         <Container className="p-5 text-center">
           <div className="custom-horizontal-line" />
           <h1 className="fw-light text-uppercase my-4">Gallary</h1>
@@ -73,15 +72,17 @@ const Gallary = () => {
       </div>
     );
   }
+
   return (
-    <div className="bg-grey pt-5">
+    <div className="background-grey pt-5">
       <Container className="px-5">
-        <div className="custom-horizontal-line"></div>
+        <div className="custom-horizontal-line" />
         <h1 className="fw-light text-uppercase my-4">Gallary</h1>
       </Container>
+      <SplitSlider />
       <Slider {...settings}>
         {images.map(({ img_src, id }) => (
-          <div key={id} className="gallary-img-div">
+          <div key={id} className="gallary-img-div mt-1.5">
             <img src={img_src} alt="" />
           </div>
         ))}
