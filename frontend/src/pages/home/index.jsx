@@ -1,9 +1,9 @@
-import React from "react";
 import Header from "../../components/navbar/index";
 import Banner from "../../components/banner/index";
 import Footer from "../../components/footer/index";
 import Destinations from "../../components/destinations/list";
 import Gallary from "../../components/gallary";
+import Reviews from "../../components/reviews";
 
 const HomePage = () => {
   return (
@@ -11,6 +11,7 @@ const HomePage = () => {
       <Header />
       <Banner />
       <Destinations />
+      <Reviews />
       <Gallary />
       <Footer />
     </div>

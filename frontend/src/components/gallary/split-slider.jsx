@@ -19,7 +19,7 @@ const SplitSlider = () => {
     <div className="slider">
       <div className="slider-titles">
         {destinationSlides.map(({ name }) => (
-          <div className="title">
+          <div key={name} className="title">
             <h1>{name}</h1>
           </div>
         ))}

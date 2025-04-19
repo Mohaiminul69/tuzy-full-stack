@@ -74,7 +74,7 @@ const Gallary = () => {
   }
 
   return (
-    <div className="background-grey pt-5">
+    <div className="background-black pt-5">
       <Container className="px-5">
         <div className="custom-horizontal-line" />
         <h1 className="fw-light text-uppercase my-4">Gallary</h1>
