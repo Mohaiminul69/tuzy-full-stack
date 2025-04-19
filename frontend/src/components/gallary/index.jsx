@@ -74,10 +74,10 @@ const Gallary = () => {
   }
 
   return (
-    <div className="background-black pt-5">
-      <Container className="px-5">
-        <div className="custom-horizontal-line" />
-        <h1 className="fw-light text-uppercase my-4">Gallary</h1>
+    <div className="background-black pt-4">
+      <Container className="flex flex-col items-center md:items-start">
+        <h1 className="fw-light text-uppercase mb-4">Gallary</h1>
+        <div className="custom-horizontal-line hidden lg:block" />
       </Container>
       <SplitSlider />
       <div className="infinite-slider-wrapper">

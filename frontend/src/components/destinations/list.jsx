@@ -81,7 +81,7 @@ const Destinations = () => {
     return (
       <div className="background-grey">
         <Container className="p-5 text-center">
-          <div className="custom-horizontal-line"></div>
+          <div className="custom-horizontal-line" />
           <h1 className="fw-light text-uppercase mt-4 mb-3">Popular Tours</h1>
           <Spinner animation="border" variant="danger" />;
         </Container>
@@ -91,9 +91,9 @@ const Destinations = () => {
 
   return (
     <div className="background-grey">
-      <Container className="p-5">
-        <div className="custom-horizontal-line"></div>
-        <h1 className="fw-light text-uppercase mt-4 mb-3">Popular Tours</h1>
+      <Container className="pt-2 pb-5 px-5 md:!px-0">
+        <h1 className="fw-light text-uppercase mt-4 mb-4">Popular Tours</h1>
+        <div className="custom-horizontal-line mb-5 hidden md:block" />
         <Slider {...settings}>
           {locations?.map((location) => (
             <DestinationCard key={location._id} location={location} />

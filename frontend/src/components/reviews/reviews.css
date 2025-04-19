@@ -34,7 +34,7 @@
   overflow: hidden;
   pointer-events: none;
   position: absolute;
-  transform: translate(-50%, -50%) scale(0.5);
+  transform: translate(-50%, -50%) scale(0.5) rotate(-15deg);
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
   width: 300px;
 }
@@ -54,7 +54,7 @@
 
 #cursor-slider a:hover .img-wrapper {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1) rotate(-4deg);
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 

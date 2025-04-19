@@ -35,9 +35,9 @@ const Reviews = () => {
 
   return (
     <div className="background-dark">
-      <Container className="px-5 pt-5">
-        <div className="custom-horizontal-line" />
-        <h1 className="fw-light text-uppercase mt-4">Reviews</h1>
+      <Container className="pt-4 flex flex-col items-center md:items-start">
+        <h1 className="fw-light text-uppercase mb-4">Reviews</h1>
+        <div className="custom-horizontal-line hidden md:block" />
       </Container>
       <div id="cursor-slider">
         {destinationSlides.map(({ name, img_src }) => (
@@ -49,6 +49,9 @@ const Reviews = () => {
           </a>
         ))}
       </div>
+      <span className="text-xs text-center block text-gray-500 pb-4 lowercase">
+        We show you only the good reviews because we value positivity.
+      </span>
     </div>
   );
 };
