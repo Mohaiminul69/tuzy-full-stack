@@ -34,9 +34,9 @@ const Reviews = () => {
   }, []);
 
   return (
-    <div className="background-dark">
+    <div>
       <Container className="pt-4 flex flex-col items-center md:items-start">
-        <h1 className="fw-light text-uppercase mb-4">Reviews</h1>
+        <h1 className="fw-light text-uppercase mb-4 text-black">Reviews</h1>
         <div className="custom-horizontal-line hidden md:block" />
       </Container>
       <div id="cursor-slider">

@@ -90,9 +90,11 @@ const Destinations = () => {
   }
 
   return (
-    <div className="background-grey">
+    <div>
       <Container className="pt-2 pb-5 px-5 md:!px-0">
-        <h1 className="fw-light text-uppercase mt-4 mb-4">Popular Tours</h1>
+        <h1 className="fw-light text-uppercase mt-4 mb-4 text-black">
+          Popular Tours
+        </h1>
         <div className="custom-horizontal-line mb-5 hidden md:block" />
         <Slider {...settings}>
           {locations?.map((location) => (
