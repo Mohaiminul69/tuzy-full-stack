@@ -14,9 +14,9 @@ const DestinationCard = ({ location }) => {
       />
       <h5>{name}</h5>
       <p className="text-xs text-gray-300">{short_description}</p>
-      <Link to={`/details/${id}`}>
+      <Link to={`destination/details/${id}`}>
         <button className="btn btn-danger btn-sm !font-bold !text-black !bg-amber-400 !px-2 !border-gray-900">
-          Book Now
+          View Details
         </button>
       </Link>
     </div>

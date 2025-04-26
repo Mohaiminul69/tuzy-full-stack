@@ -39,7 +39,7 @@ const Header = () => {
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            <NavLink className="navLink" to="/home">
+            <NavLink className="navLink" to="/">
               Home
             </NavLink>
             {/* 

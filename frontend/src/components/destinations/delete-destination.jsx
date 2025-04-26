@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ConfirmModal from "../modals/confirm-modal";
-import AlertModal from "../modals/alert-modal";
+import ConfirmModal from "../shared/modals/confirm-modal";
+import AlertModal from "../shared/modals/alert-modal";
 import {
   useDeleteDestinationMutation,
   useGetDestinationsQuery,
 } from "../../api/destinations";
-import "./delete-destination.css";
+import "./destination.css";
 
 const DeleteDestination = () => {
   // Alert Modal
@@ -46,9 +46,10 @@ const DeleteDestination = () => {
   const sendIdToModal = () => {
     handleShow();
   };
+
   if (isFetching) {
     return (
-      <div className="bgMyOrders py-5">
+      <div className="bg-my-orders py-5">
         <h1 className="display-2 my-5">All Tours</h1>
         <Container className="text-center">
           <Spinner animation="border" variant="danger" />;
@@ -56,8 +57,9 @@ const DeleteDestination = () => {
       </div>
     );
   }
+
   return (
-    <div className="bgMyOrders py-5">
+    <div className="bg-my-orders py-5">
       <h1 className="display-2 my-5">All Tours</h1>
       <Container>
         {destinations.length === 0 ? (
@@ -66,7 +68,7 @@ const DeleteDestination = () => {
           <Row>
             {destinations.map((destination) => (
               <Col key={destination.id} sm={12} md={6} lg={4} className="mb-3">
-                <div className="orderView">
+                <div className="order-view">
                   <img src={destination.img_src} alt="" />
                   <h4 className="fw-light mt-3">{destination.name}</h4>
                   <div className="d-flex justify-content-between">

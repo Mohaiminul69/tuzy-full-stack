@@ -1,5 +1,5 @@
 import React from "react";
-import CreateUpdateForm from "../forms/create-update-form";
+import CreateUpdateForm from "../shared/forms/create-update-form";
 import {
   useCreateDestinationMutation,
   useGetSingleDestinationQuery,
@@ -45,7 +45,6 @@ const DestinationForm = () => {
   return (
     <CreateUpdateForm
       title="destination"
-      subtitle="Please fill up the form to "
       formfields={formfields}
       callback={callback}
       defaultValues={data?.destination}

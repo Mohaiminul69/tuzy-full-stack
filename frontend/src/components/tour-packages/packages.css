@@ -52,7 +52,6 @@
 
 .menu__item-text_active {
   border-left: 15px solid transparent;
-  border-radius: 20px;
   border-right: 15px solid transparent;
   border-top: 20px solid #c24628;
   display: inline-block;

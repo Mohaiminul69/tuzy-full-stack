@@ -3,12 +3,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import ModalAlert from "../modals/alert-modal";
+import AlertModal from "../modals/alert-modal";
 import "./form.css";
 
 const CreateUpdateForm = ({
   title,
-  subtitle,
   showManageButton,
   formfields,
   callback,
@@ -24,7 +23,7 @@ const CreateUpdateForm = ({
   const action = id ? "edit" : "add";
   const alertStatus = id ? "updated" : "created";
   const formTitle = `${action} ${title}`;
-  const formSubtitle = `${subtitle} ${action} ${title}`;
+  const formSubtitle = `Please fill up the form to ${action} ${title}`;
   const navigate = useNavigate();
   const [alertText, setAlertText] = useState("");
   const [showAlert, setShowAlert] = useState(false);
@@ -90,13 +89,12 @@ const CreateUpdateForm = ({
               <div className="flex gap-4 w-full items-start mt-3">
                 <button
                   type="submit"
-                  className="py-2 rounded-3 px-5 bg-teal-800 font-bold !capitalize"
+                  className="btn btn-danger btn-sm !font-bold !bg-cyan-800 hover:!bg-cyan-900 !py-2 !px-4 !border-gray-900 !capitalize !rounded-lg"
                 >
                   {formTitle}
                 </button>
                 <button
-                  type="submit"
-                  className="py-2 rounded-3 px-5 bg-danger font-bold !capitalize"
+                  className="btn btn-danger btn-sm !font-bold !bg-rose-700 hover:!bg-rose-800 !py-2 !px-4 !border-gray-900 !capitalize !rounded-lg"
                   onClick={() => navigate("/")}
                 >
                   cancel
@@ -107,7 +105,7 @@ const CreateUpdateForm = ({
           <Col sm={12} md={3}></Col>
         </Row>
       </Container>
-      <ModalAlert
+      <AlertModal
         showAlert={showAlert}
         closeAlert={closeAlert}
         alertText={alertText}

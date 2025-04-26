@@ -1,5 +1,5 @@
 import React from "react";
-import CreateUpdateForm from "../forms/create-update-form";
+import CreateUpdateForm from "../shared/forms/create-update-form";
 import {
   useCreateGallaryImageMutation,
   useGetSingleGallaryImageQuery,
@@ -25,7 +25,6 @@ const GallaryImageForm = () => {
   return (
     <CreateUpdateForm
       title="gallary image"
-      subtitle="Please fill up the form to "
       formfields={formfields}
       callback={callback}
       defaultValues={data?.gallary_image}
