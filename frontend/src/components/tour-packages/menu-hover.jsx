@@ -54,7 +54,7 @@ const MenuHover = () => {
 
       const onMouseMove = ({ clientX: x, clientY: y }) => {
         let yOffset = itemBounds.top / imageWrapperBounds.height;
-        yOffset = gsap.utils.mapRange(0, 1.5, -150, 150, yOffset);
+        yOffset = gsap.utils.mapRange(0.1, 1.5, -150, 150, yOffset);
 
         gsap.to(imageWrapper, {
           duration: 1.25,
