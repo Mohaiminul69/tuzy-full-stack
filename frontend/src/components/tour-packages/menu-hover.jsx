@@ -39,7 +39,7 @@ const MenuHover = () => {
           y: 50,
           rotation: -15,
         });
-        gsap.to(imageWrapper, { opacity: 1, scale: 1, y: 0, rotation: 0 });
+        gsap.to(imageWrapper, { opacity: 1, scale: 1, y: 0, rotation: -2 });
       };
 
       const onMouseLeave = () => {
