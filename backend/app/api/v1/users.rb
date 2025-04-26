@@ -27,7 +27,21 @@ module V1
         })
 
         if user.save
-          { message: "User created successfully", user: user }
+          token = JwtService.encode(user_id: user.id)
+
+          { 
+            message: "User created successfully", 
+            user:
+              {
+                id: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                date_of_birth: user.date_of_birth,
+                img_src: user.img_src,
+              },
+            token: token
+          }
         else
           error!({ message: "Failed to register the user", error: user.errors.full_messages }, 422)
         end

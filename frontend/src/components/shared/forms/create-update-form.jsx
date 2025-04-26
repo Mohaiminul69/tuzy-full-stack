@@ -47,10 +47,16 @@ const CreateUpdateForm = ({
 
     callback(formDataObj)
       .unwrap()
-      .then(() => {
+      .then((data) => {
+        if (data?.token) {
+          localStorage.setItem("token", data.token);
+        }
         setAlertText(`${title} ${alertStatus}`);
         handleAlert();
         reset();
+      })
+      .catch((error) => {
+        console.error(error);
       });
   };
 
