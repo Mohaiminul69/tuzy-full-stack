@@ -9,7 +9,7 @@ const Destinations = () => {
   /*
 <---------------------------- Fetching Tour Data from database ---------------------------->
 */
-  const { data: locations = [], isFetching } = useGetDestinationsQuery();
+  const { data: destinations = [], isFetching } = useGetDestinationsQuery();
   /*
 <---------------------------- Slider Data ---------------------------->
 */
@@ -97,8 +97,8 @@ const Destinations = () => {
         </h1>
         <div className="custom-horizontal-line mb-5 hidden md:block" />
         <Slider {...settings}>
-          {locations?.map((location) => (
-            <DestinationCard key={location._id} location={location} />
+          {destinations?.map((destination) => (
+            <DestinationCard key={destination.id} destination={destination} />
           ))}
         </Slider>
       </Container>

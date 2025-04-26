@@ -94,7 +94,7 @@ const CreateUpdateForm = ({
                   {formTitle}
                 </button>
                 <button
-                  className="btn btn-danger btn-sm !font-bold !bg-rose-700 hover:!bg-rose-800 !py-2 !px-4 !border-gray-900 !capitalize !rounded-lg"
+                  className="btn btn-danger btn-sm !font-bold !bg-[#a93939] hover:!bg-[#a93939]/80 !py-2 !px-4 !border-gray-900 !capitalize !rounded-lg"
                   onClick={() => navigate("/")}
                 >
                   cancel
