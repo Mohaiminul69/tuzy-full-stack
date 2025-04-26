@@ -1,0 +1,28 @@
+.bg-login {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  background: url("https://i.ibb.co/tpKVHPN/pexels-artem-beliaikin-853199.jpg")
+    no-repeat center center/cover;
+}
+
+.bg-login::after {
+  background: rgba(0, 0, 0, 0.7);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: 0.5s;
+  width: 100%;
+  z-index: -1;
+}
+
+.google-icon {
+  height: 30px;
+}

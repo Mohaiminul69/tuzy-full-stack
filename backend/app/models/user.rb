@@ -1,0 +1,7 @@
+class User < ApplicationRecord
+  has_secure_password
+
+  has_many :bookings
+  has_many :booked_destinations, through: :bookings, source: :destination
+  has_many :booked_packages, through: :bookings, source: :package
+end

@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_25_171528) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_26_123820) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "destination_id"
+    t.bigint "package_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_id"], name: "index_bookings_on_destination_id"
+    t.index ["package_id"], name: "index_bookings_on_package_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
 
   create_table "destinations", force: :cascade do |t|
     t.string "name"
@@ -39,4 +50,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_25_171528) do
     t.datetime "updated_at", null: false
     t.string "short_description"
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest"
+    t.string "img_src"
+    t.date "date_of_birth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "bookings", "destinations"
+  add_foreign_key "bookings", "packages"
+  add_foreign_key "bookings", "users"
 end

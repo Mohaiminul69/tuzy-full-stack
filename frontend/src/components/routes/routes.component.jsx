@@ -7,6 +7,7 @@ import DestinationForm from "../destinations/destination-form";
 import PackageForm from "../tour-packages/package-form.jsx";
 import PackagesDetails from "../tour-packages/packages-details.jsx";
 import DestinationDetails from "../destinations/destination-details.jsx";
+import Register from "../authentication/register/index.jsx";
 
 export default function RoutesComponent() {
   return (
@@ -20,6 +21,7 @@ export default function RoutesComponent() {
       <Route path="/package/new" element={<PackageForm />} />
       <Route path="/package/edit/:id" element={<PackageForm />} />
       <Route path="/package/details/:id" element={<PackagesDetails />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/" element={<HomePage />} />
     </Routes>
   );

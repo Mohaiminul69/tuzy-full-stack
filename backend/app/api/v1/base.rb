@@ -6,5 +6,6 @@ module V1
     mount V1::Destinations
     mount V1::GallaryImages
     mount V1::Packages
+    mount V1::Users
   end
 end
