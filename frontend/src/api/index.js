@@ -30,6 +30,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const apiSlice = createApi({
   reducerPath: "api", // optional, just the key in your store
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["Destination", "GallaryImage"],
+  tagTypes: ["Destination", "GallaryImage", "User"],
   endpoints: () => ({}),
 });

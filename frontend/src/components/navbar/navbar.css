@@ -1,22 +1,27 @@
 .logo {
-    width: 70px;
-  }
-  .signUp {
-    background: crimson;
-    border-radius: 25px;
-    padding: 5px 20px !important;
-    color: white !important;
-  }
-  /* .customNav {
+  width: 70px;
+}
+
+.sign-up {
+  background: crimson;
+  border-radius: 25px;
+  color: white !important;
+  padding: 5px 20px !important;
+}
+
+/* .customNav {
     background: rgba(27, 27, 27, 0);
   } */
-  .navLink {
-    color: white !important;
-    text-decoration: none;
-    margin-left: 20px;
-  }
-  .displayPic {
-    width: 40px;
-    border: 2px solid white;
-    border-radius: 50%;
-  }
+
+.nav-link {
+  color: white !important;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.display-pic {
+  border: 2px solid white;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}

@@ -2,13 +2,31 @@ import React, { useEffect, useRef } from "react";
 import { Fragment } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-// import useAuth from "./../../Hooks/useAuth";
+import { useGetCurrentUserQuery } from "../../api/users";
+import { toast } from "react-toastify";
 import "./navbar.css";
 
 const Header = () => {
-  // const { user, logOut } = useAuth();
-  const user = () => {};
-  const logOut = () => {};
+  const token = localStorage.getItem("token");
+
+  const { data, refetch } = useGetCurrentUserQuery(undefined, { skip: !token });
+
+  // Fetch data only when token is available
+  useEffect(() => {
+    if (token) {
+      // When token is present, refetch the user data (in case you just logged in)
+      refetch();
+    }
+  }, [token, refetch]);
+
+  const user = data?.user;
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+    toast.success("Logged out successfully");
+  };
+
   const customNav = useRef(null);
 
   useEffect(() => {
@@ -39,7 +57,7 @@ const Header = () => {
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            <NavLink className="navLink" to="/">
+            <NavLink className="nav-link" to="/">
               Home
             </NavLink>
             {/* 
@@ -47,25 +65,29 @@ const Header = () => {
 */}
             {user?.email ? (
               <Fragment>
-                <NavLink className="navLink" to="/addTour">
-                  Add Tour
+                <NavLink className="nav-link" to="/destination/new">
+                  Add Destination
                 </NavLink>
-                <NavLink className="navLink" to="/manage">
+                <NavLink className="nav-link" to="/manage">
                   Manage Bookings
                 </NavLink>
-                <NavLink className="navLink" to="/myOrders">
+                <NavLink className="nav-link" to="/myOrders">
                   My Bookings
                 </NavLink>
-                <Button className="ms-3" onClick={logOut} variant="danger">
+                <Button
+                  className="ms-3 btn btn-danger btn-sm !font-bold !bg-[#a93939] hover:!bg-[#a93939]/80 !py-2 !px-4 !border-gray-900 !capitalize !rounded-sm"
+                  onClick={logout}
+                  variant="danger"
+                >
                   Logout
                 </Button>
               </Fragment>
             ) : (
               <Fragment>
-                <NavLink className="navLink" to="/login">
+                <NavLink className="nav-link" to="/login">
                   Login
                 </NavLink>
-                {/* <NavLink className="navLink" to="/register">
+                {/* <NavLink className="nav-link" to="/register">
                   Register
                 </NavLink> */}
               </Fragment>
@@ -81,8 +103,8 @@ const Header = () => {
             {/* 
 <----------------------- Showing User Display Picture ----------------------->
  */}
-            {user?.photoURL && (
-              <img className="displayPic ms-3" src={user.photoURL} alt="" />
+            {user?.img_src && (
+              <img className="display-pic ms-3" src={user?.img_src} alt="" />
             )}
           </Navbar.Collapse>
         </Container>

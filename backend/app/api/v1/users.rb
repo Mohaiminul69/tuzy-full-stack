@@ -3,6 +3,23 @@ module V1
     format :json
 
     resource :users do
+      desc "Fetch current user info"
+
+      get :me do
+        authenticate_user!
+
+        {
+          user: {
+            id: @current_user.id,
+            first_name: @current_user.first_name,
+            last_name: @current_user.last_name,
+            email: @current_user.email,
+            img_src: @current_user.img_src,
+            date_of_birth: @current_user.date_of_birth,
+          }
+        }
+      end
+      
       desc "Register a User"
 
       params do
@@ -44,6 +61,35 @@ module V1
           }
         else
           error!({ message: "Failed to register the user", error: user.errors.full_messages }, 422)
+        end
+      end
+
+      desc "Login a user"
+
+      params do
+        requires :email, type: String
+        requires :password, type: String
+      end
+
+      post :login do
+        user = User.find_by(email: params[:email])
+
+        if user&.authenticate(params[:password])
+          token = JwtService.encode(user_id: user.id)
+          { 
+            user:
+              {
+                id: user.id,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                date_of_birth: user.date_of_birth,
+                img_src: user.img_src,
+              },
+            token: token
+          }
+        else
+          error!({ message: "Invalid email or password" }, 401)
         end
       end
     end

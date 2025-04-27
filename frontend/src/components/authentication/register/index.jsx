@@ -1,6 +1,6 @@
 import React from "react";
 import CreateUpdateForm from "../../shared/forms/create-update-form";
-import { useRegisterUserMutation } from "../../../api/users";
+import { useUserRegisterMutation } from "../../../api/users";
 
 const formfields = [
   {
@@ -41,7 +41,7 @@ const formfields = [
 ];
 
 const Register = () => {
-  const [register] = useRegisterUserMutation();
+  const [register] = useUserRegisterMutation();
 
   return (
     <CreateUpdateForm
