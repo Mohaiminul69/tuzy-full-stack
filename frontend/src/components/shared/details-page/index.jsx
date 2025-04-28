@@ -1,14 +1,25 @@
 import React from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router";
+import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
+import toastStyle from "../../../utils/taost-style";
 import "./details.css";
 
 const DetailsPage = ({ callback, dataType }) => {
+  const { isLoggedIn } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const { data, isFetching } = callback(id);
   const viewData = data?.[dataType];
+
+  const onBooking = () => {
+    if (!isLoggedIn) {
+      toast.error("Please login first", toastStyle);
+    }
+    navigate("/book");
+  };
 
   if (isFetching) {
     return (
@@ -48,15 +59,18 @@ const DetailsPage = ({ callback, dataType }) => {
                 <span className="text-warning"> ${price}</span>
               </p>
               <div className="flex gap-x-4">
-                <button className="btn btn-danger btn-sm !font-bold !text-black !bg-amber-400 hover:!bg-amber-300 !px-2 !border-gray-900 !capitalize">
-                  <i class="fas fa-credit-card mr-2"></i>
+                <button
+                  className="btn btn-danger btn-sm !font-bold !text-black !bg-amber-400 hover:!bg-amber-300 !px-2 !border-gray-900 !capitalize"
+                  onClick={onBooking}
+                >
+                  <i className="fas fa-credit-card mr-2"></i>
                   book now
                 </button>
                 <button
                   className="btn btn-danger btn-sm !font-bold !bg-cyan-700 hover:!bg-cyan-800 !px-2 !border-gray-900 !capitalize"
                   onClick={() => navigate("/")}
                 >
-                  <i class="fas fa-chevron-left mr-2"></i>
+                  <i className="fas fa-chevron-left mr-2"></i>
                   back to home
                 </button>
               </div>

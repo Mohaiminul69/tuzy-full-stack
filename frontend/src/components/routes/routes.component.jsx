@@ -9,6 +9,8 @@ import PackagesDetails from "../tour-packages/packages-details.jsx";
 import DestinationDetails from "../destinations/destination-details.jsx";
 import Register from "../authentication/register/index.jsx";
 import Login from "../authentication/login/index.jsx";
+import Bookings from "../bookings/index.jsx";
+import ProtectedRoute from "./protected-route.jsx";
 
 export default function RoutesComponent() {
   return (
@@ -25,6 +27,9 @@ export default function RoutesComponent() {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<HomePage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/book" element={<Bookings />} />
+      </Route>
     </Routes>
   );
 }

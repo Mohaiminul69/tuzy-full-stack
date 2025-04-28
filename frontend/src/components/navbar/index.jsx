@@ -3,31 +3,23 @@ import { Fragment } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { useGetCurrentUserQuery } from "../../api/users";
-import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 import "./navbar.css";
 
 const Header = () => {
-  const token = localStorage.getItem("token");
+  const customNav = useRef(null);
+  const { user, isLoggedIn, logout } = useAuth();
+  const { data, refetch } = useGetCurrentUserQuery(undefined, {
+    skip: !isLoggedIn,
+  });
 
-  const { data, refetch } = useGetCurrentUserQuery(undefined, { skip: !token });
+  const currentUser = data?.user || user;
 
-  // Fetch data only when token is available
   useEffect(() => {
-    if (token) {
-      // When token is present, refetch the user data (in case you just logged in)
+    if (isLoggedIn) {
       refetch();
     }
-  }, [token, refetch]);
-
-  const user = data?.user;
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-    toast.success("Logged out successfully");
-  };
-
-  const customNav = useRef(null);
+  }, [isLoggedIn, refetch]);
 
   useEffect(() => {
     const handleScroll = () =>
@@ -60,10 +52,7 @@ const Header = () => {
             <NavLink className="nav-link" to="/">
               Home
             </NavLink>
-            {/* 
-<----------------- Showing Logout Button If the user is logged in ----------------->
-*/}
-            {user?.email ? (
+            {currentUser?.email ? (
               <Fragment>
                 <NavLink className="nav-link" to="/destination/new">
                   Add Destination
@@ -77,7 +66,6 @@ const Header = () => {
                 <Button
                   className="ms-3 btn btn-danger btn-sm !font-bold !bg-[#a93939] hover:!bg-[#a93939]/80 !py-2 !px-4 !border-gray-900 !capitalize !rounded-sm"
                   onClick={logout}
-                  variant="danger"
                 >
                   Logout
                 </Button>
@@ -92,19 +80,17 @@ const Header = () => {
                 </NavLink> */}
               </Fragment>
             )}
-            {/* 
-<----------------------- Showing Display Name of User ----------------------->
- */}
-            {user?.displayName && (
+            {currentUser?.first_name && (
               <Navbar.Text className="ms-3 text-white">
-                <span>{user.displayName}</span>
+                <span>{`${currentUser.first_name} ${currentUser?.last_name}`}</span>
               </Navbar.Text>
             )}
-            {/* 
-<----------------------- Showing User Display Picture ----------------------->
- */}
-            {user?.img_src && (
-              <img className="display-pic ms-3" src={user?.img_src} alt="" />
+            {currentUser?.img_src && (
+              <img
+                className="display-pic ms-3"
+                src={currentUser?.img_src}
+                alt=""
+              />
             )}
           </Navbar.Collapse>
         </Container>

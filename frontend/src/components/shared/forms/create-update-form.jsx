@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AlertModal from "../modals/alert-modal";
+import useAuth from "../../../hooks/useAuth";
 import "./form.css";
 
 const CreateUpdateForm = ({
@@ -27,6 +28,7 @@ const CreateUpdateForm = ({
   const navigate = useNavigate();
   const [alertText, setAlertText] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const { login } = useAuth();
 
   const closeAlert = () => {
     setShowAlert(false);
@@ -49,7 +51,7 @@ const CreateUpdateForm = ({
       .unwrap()
       .then((data) => {
         if (data?.token) {
-          localStorage.setItem("token", data.token);
+          login(data.user, data.token);
         }
         setAlertText(`${title} ${alertStatus}`);
         handleAlert();
@@ -63,7 +65,7 @@ const CreateUpdateForm = ({
   // if (false) return "Hello Loader";
 
   return (
-    <div className="bgAddTour py-5">
+    <div className="bg-form py-5 bg-black h-screen">
       <h1 className="display-3 mt-5 capitalize">{formTitle}</h1>
       <Container className="mt-2">
         <Row>
@@ -75,7 +77,7 @@ const CreateUpdateForm = ({
             )}
           </Col>
           <Col sm={12} md={6}>
-            <form onSubmit={handleSubmit(onSubmit)} className="AddTourForm">
+            <form onSubmit={handleSubmit(onSubmit)} className="add-tour-form">
               <h6 className="fw-light fs-5 mb-4">{formSubtitle}</h6>
               {formfields.map(({ fieldName, placeholder, label }) => (
                 <div className="mb-3 w-full" key={fieldName}>
