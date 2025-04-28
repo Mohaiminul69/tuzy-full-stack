@@ -18,7 +18,7 @@ const DetailsPage = ({ callback, dataType }) => {
     if (!isLoggedIn) {
       toast.error("Please login first", toastStyle);
     }
-    navigate("/book");
+    navigate(`/book/${dataType}/${id}`);
   };
 
   if (isFetching) {
