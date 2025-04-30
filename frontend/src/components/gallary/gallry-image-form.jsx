@@ -24,10 +24,11 @@ const GallaryImageForm = () => {
 
   return (
     <CreateUpdateForm
-      title="gallary image"
+      title="add gallary image"
       formfields={formfields}
       callback={callback}
       defaultValues={data?.gallary_image}
+      alertText="image added"
     />
   );
 };

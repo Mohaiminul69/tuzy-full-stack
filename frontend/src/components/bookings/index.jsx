@@ -26,21 +26,25 @@ const formfields = [
   },
   {
     fieldName: "destination_id",
-    label: "Destination ID",
-    placeholder: "Please enter destination id",
+    hidden: true,
+  },
+  {
+    fieldName: "package_id",
+    hidden: true,
   },
 ];
 
 const BookingForm = () => {
   const [createBooking] = useCreateBookingMutation();
-  const { id } = useParams();
+  const { dataType, id } = useParams();
 
   return (
     <CreateUpdateForm
-      title="booking"
+      title="book trip"
       formfields={formfields}
       callback={createBooking}
-      defaultValues={{ destination_id: id }}
+      defaultValues={{ [`${dataType}_id`]: id }}
+      alertText="your trip has been booked"
     />
   );
 };

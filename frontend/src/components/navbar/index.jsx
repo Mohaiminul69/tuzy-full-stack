@@ -75,9 +75,9 @@ const Header = () => {
                 <NavLink className="nav-link" to="/login">
                   Login
                 </NavLink>
-                {/* <NavLink className="nav-link" to="/register">
+                <NavLink className="nav-link" to="/register">
                   Register
-                </NavLink> */}
+                </NavLink>
               </Fragment>
             )}
             {currentUser?.first_name && (

@@ -45,9 +45,10 @@ const Register = () => {
 
   return (
     <CreateUpdateForm
-      title="user"
+      title="register"
       formfields={formfields}
       callback={register}
+      alertText="user registered"
     />
   );
 };

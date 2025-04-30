@@ -41,13 +41,16 @@ const DestinationForm = () => {
   const [updateDestination] = useUpdateDestinationMutation();
   const { data = null } = useGetSingleDestinationQuery(id);
   const callback = id ? updateDestination : createDestination;
+  const title = id ? "update destination" : "add destination";
+  const alertText = id ? "destination updated" : "destination added";
 
   return (
     <CreateUpdateForm
-      title="destination"
+      title={title}
       formfields={formfields}
       callback={callback}
       defaultValues={data?.destination}
+      alertText={alertText}
     />
   );
 };

@@ -13,6 +13,7 @@ const CreateUpdateForm = ({
   formfields,
   callback,
   defaultValues,
+  alertText,
 }) => {
   const {
     register,
@@ -21,12 +22,8 @@ const CreateUpdateForm = ({
     formState: { errors },
   } = useForm();
   const { id } = useParams();
-  const action = id ? "edit" : "add";
-  const alertStatus = id ? "updated" : "created";
-  const formTitle = `${action} ${title}`;
-  const formSubtitle = `Please fill up the form to ${action} ${title}`;
+  const formSubtitle = `Please fill up the form to ${title}`;
   const navigate = useNavigate();
-  const [alertText, setAlertText] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const { login } = useAuth();
 
@@ -34,8 +31,6 @@ const CreateUpdateForm = ({
     setShowAlert(false);
     navigate("/");
   };
-
-  const handleAlert = () => setShowAlert(true);
 
   const onSubmit = (data) => {
     const formdata = new FormData();
@@ -53,8 +48,7 @@ const CreateUpdateForm = ({
         if (data?.token) {
           login(data.user, data.token);
         }
-        setAlertText(`${title} ${alertStatus}`);
-        handleAlert();
+        setShowAlert(true);
         reset();
       })
       .catch((error) => {
@@ -66,7 +60,7 @@ const CreateUpdateForm = ({
 
   return (
     <div className="bg-form py-5 bg-black h-screen">
-      <h1 className="display-3 mt-5 capitalize">{formTitle}</h1>
+      <h1 className="display-3 mt-5 capitalize">{title}</h1>
       <Container className="mt-2">
         <Row>
           <Col sm={12} md={3}>
@@ -79,27 +73,41 @@ const CreateUpdateForm = ({
           <Col sm={12} md={6}>
             <form onSubmit={handleSubmit(onSubmit)} className="add-tour-form">
               <h6 className="fw-light fs-5 mb-4">{formSubtitle}</h6>
-              {formfields.map(({ fieldName, placeholder, label }) => (
-                <div className="mb-3 w-full" key={fieldName}>
-                  <label htmlFor={fieldName} className="form-label capitalize">
-                    {label}*
-                  </label>
+              {formfields.map(({ fieldName, placeholder, label, hidden }) =>
+                hidden ? (
                   <input
                     defaultValue={defaultValues?.[fieldName]}
+                    hidden={hidden}
                     {...register(fieldName, { required: id ? false : true })}
-                    placeholder={placeholder}
-                    className={`form-control ${
-                      errors[fieldName] ? "is-invalid ring-3 ring-red-500" : ""
-                    }`}
                   />
-                </div>
-              ))}
-              <div className="flex gap-4 w-full items-start mt-3">
+                ) : (
+                  <div className="mb-3 w-full" key={fieldName}>
+                    <label
+                      htmlFor={fieldName}
+                      className="form-label capitalize"
+                    >
+                      {label}*
+                    </label>
+                    <input
+                      defaultValue={defaultValues?.[fieldName]}
+                      hidden={hidden}
+                      {...register(fieldName, { required: id ? false : true })}
+                      placeholder={placeholder}
+                      className={`form-control ${
+                        errors[fieldName]
+                          ? "is-invalid ring-3 ring-red-500"
+                          : ""
+                      }`}
+                    />
+                  </div>
+                )
+              )}
+              <div className="flex gap-3 w-full items-start mt-3">
                 <button
                   type="submit"
                   className="btn btn-danger btn-sm !font-bold !bg-cyan-800 hover:!bg-cyan-900 !py-2 !px-4 !border-gray-900 !capitalize !rounded-lg"
                 >
-                  {formTitle}
+                  {title}
                 </button>
                 <button
                   className="btn btn-danger btn-sm !font-bold !bg-[#a93939] hover:!bg-[#a93939]/80 !py-2 !px-4 !border-gray-900 !capitalize !rounded-lg"

@@ -19,7 +19,12 @@ const Login = () => {
   const [login] = useUserLoginMutation();
 
   return (
-    <CreateUpdateForm title="login" formfields={formfields} callback={login} />
+    <CreateUpdateForm
+      title="login"
+      formfields={formfields}
+      callback={login}
+      alertText="user logged in"
+    />
   );
 };
 

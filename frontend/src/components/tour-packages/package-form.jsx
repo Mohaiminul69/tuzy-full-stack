@@ -1,6 +1,7 @@
 import React from "react";
 import { useCreatePackageMutation } from "../../api/packages";
 import CreateUpdateForm from "../shared/forms/create-update-form";
+import { useParams } from "react-router-dom";
 
 const formfields = [
   {
@@ -27,12 +28,16 @@ const formfields = [
 
 const PackageForm = () => {
   const [createPackage] = useCreatePackageMutation();
+  const { id } = useParams();
+  const alertText = id ? "package updated" : "package added";
+  const title = id ? "update package" : "add package";
 
   return (
     <CreateUpdateForm
-      title="package"
+      title={title}
       formfields={formfields}
       callback={createPackage}
+      alertText={alertText}
     />
   );
 };

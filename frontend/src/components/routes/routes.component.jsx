@@ -28,7 +28,7 @@ export default function RoutesComponent() {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<HomePage />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/book/:data-type/:id" element={<BookingForm />} />
+        <Route path="/book/:dataType/:id" element={<BookingForm />} />
       </Route>
     </Routes>
   );
