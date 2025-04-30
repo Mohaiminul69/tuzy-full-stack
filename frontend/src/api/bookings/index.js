@@ -8,8 +8,17 @@ const bookingApi = apiSlice.injectEndpoints({
         method: "POST",
         body: payload,
       }),
+      invalidatesTags: ["Booking"],
+    }),
+    checkBooking: builder.query({
+      query: (params) => ({
+        url: "bookings/check_booking",
+        method: "GET",
+        params,
+      }),
+      providesTags: ["Booking"],
     }),
   }),
 });
 
-export const { useCreateBookingMutation } = bookingApi;
+export const { useCreateBookingMutation, useCheckBookingQuery } = bookingApi;

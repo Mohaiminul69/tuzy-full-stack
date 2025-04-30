@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_28_154218) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_30_154214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -55,6 +55,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_28_154218) do
     t.string "short_description"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "destination_id"
+    t.bigint "package_id"
+    t.integer "rating", null: false
+    t.text "comment", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_id"], name: "index_reviews_on_destination_id"
+    t.index ["package_id"], name: "index_reviews_on_package_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -69,4 +82,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_28_154218) do
   add_foreign_key "bookings", "destinations"
   add_foreign_key "bookings", "packages"
   add_foreign_key "bookings", "users"
+  add_foreign_key "reviews", "destinations"
+  add_foreign_key "reviews", "packages"
+  add_foreign_key "reviews", "users"
 end

@@ -4,12 +4,18 @@ import { useNavigate, useParams } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import toastStyle from "../../../utils/taost-style";
+import { useCheckBookingQuery } from "../../../api/bookings";
 import "./details.css";
 
 const DetailsPage = ({ callback, dataType }) => {
   const { isLoggedIn } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
+  const idType = `${dataType}_id`;
+
+  const { data: bookingStatus, isFetching: isBookingLoading } =
+    useCheckBookingQuery({ [idType]: id }, { skip: !isLoggedIn });
+  const hasBooking = bookingStatus?.has_booking;
 
   const { data, isFetching } = callback(id);
   const viewData = data?.[dataType];
@@ -21,7 +27,7 @@ const DetailsPage = ({ callback, dataType }) => {
     navigate(`/book/${dataType}/${id}`);
   };
 
-  if (isFetching) {
+  if (isFetching || isBookingLoading) {
     return (
       <div className="bg-my-orders py-5">
         <Container className="text-center">
@@ -77,6 +83,7 @@ const DetailsPage = ({ callback, dataType }) => {
             </div>
           </Col>
         </Row>
+        {hasBooking && <h1 className="text-white">Review</h1>}
       </Container>
     </div>
   );

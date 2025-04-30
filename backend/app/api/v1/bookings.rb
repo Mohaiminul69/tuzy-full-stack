@@ -47,6 +47,25 @@ module V1
           error!({ message: "Booking failed", errors: booking.errors.full_messages }, 422)
         end
       end
+
+      desc "Check if the user booked any specific destination or package"
+      params do
+        optional :destination_id, type: Integer
+        optional :package_id, type: Integer
+        exactly_one_of :destination_id, :package_id
+      end
+
+      get :check_booking do
+        authenticate_user!
+
+        has_booking = Booking.exists?(
+          user_id: @current_user.id,
+          destination_id: params[:destination_id],
+          package_id: params[:package_id]
+        )
+
+        { has_booking: has_booking }
+      end
     end
   end
 end
