@@ -149,3 +149,74 @@ packages.each do |package|
 end
 
 puts "✅ Seeded #{Package.count} packages"
+
+User.create!({
+  first_name: 'Dew',
+  last_name: 'Haven',
+  email: 'dew@gmail.com',
+  date_of_birth: '02/02/2000',
+  img_src: 'https://i.ibb.co.com/txDKxnp/pexels-yogendra-singh-3971608.jpg',
+  password: 'asd123'
+})
+
+puts "✅ Seeded #{User.count} users"
+
+bookings = [
+{
+  phone_number: '01745342376',
+  address: 'House-14, Block-R, Mirpur, Dhaka',
+  credit_card_number: '1234-2342-2423',
+  booking_date: '02/02/2026',
+  destination_id: 5,
+  user_id: 1
+},
+{
+  phone_number: '01745342376',
+  address: 'House-14, Block-R, Mirpur, Dhaka',
+  credit_card_number: '1234-2342-2423',
+  booking_date: '02/02/2026',
+  package_id: 3,
+  user_id: 1
+ }
+]
+
+bookings.each do |booking|
+  Booking.create!({
+    phone_number: booking[:phone_number],
+    address: booking[:address],
+    credit_card_number: booking[:credit_card_number],
+    booking_date: booking[:booking_date],
+    destination_id: booking[:destination_id],
+    package_id: booking[:package_id],
+    user_id: booking[:user_id]
+  })
+end
+
+puts "✅ Seeded #{Booking.count} bookings"
+
+reviews = [
+  {
+    rating: 3,
+    comment: 'I am going to go to bali one day for sure',
+    destination_id: 5,
+    user_id: 1
+  },
+  {
+    rating: 3,
+    comment: 'I am going do sky diving one day.',
+    package_id: 3,
+    user_id: 1
+  }
+]
+
+reviews.each do |review|
+  Review.create({
+    rating: review[:rating],
+    comment: review[:comment],
+    destination_id: review[:destination_id],
+    package_id: review[:package_id],
+    user_id: review[:user_id],
+  })
+end
+
+puts "✅ Seeded #{Review.count} reviews"

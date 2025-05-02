@@ -6,7 +6,7 @@ const Comment = ({ review }) => {
   const user = data?.user || {};
 
   return (
-    <div className="flex gap-3 items-center border-b border-gray-700 pb-3 w-9/10">
+    <div className="flex gap-3 items-center border-b border-gray-700 pb-3 w-9/10 last:border-0">
       {user?.img_src && (
         <img
           className="border-3 border-white !w-[45px] !h-[45px] !rounded-full"

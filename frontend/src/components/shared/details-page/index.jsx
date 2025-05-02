@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import toastStyle from "../../../utils/taost-style";
 import { useCheckBookingQuery } from "../../../api/bookings";
 import ReviewForm from "../forms/review-form";
+import { useGetSpecificTourReviewsQuery } from "../../../api/reviews";
+import Comment from "../forms/comment";
 import "./details.css";
 
 const DetailsPage = ({ callback, tourType }) => {
@@ -13,6 +15,11 @@ const DetailsPage = ({ callback, tourType }) => {
   const { isLoggedIn } = useAuth();
   const { id } = useParams();
   const idType = `${tourType}_id`;
+
+  const { data: reviews = [] } = useGetSpecificTourReviewsQuery({
+    tourType,
+    id,
+  });
 
   const { data: bookingStatus, isFetching: isBookingLoading } =
     useCheckBookingQuery({ [idType]: id }, { skip: !isLoggedIn });
@@ -84,7 +91,17 @@ const DetailsPage = ({ callback, tourType }) => {
             </div>
           </Col>
         </Row>
-        {hasBooking && <ReviewForm tourType={tourType} />}
+        {(reviews.length !== 0 || hasBooking) && (
+          <div className="details-card mt-2 text-white">
+            <h1>Reviews</h1>
+            {hasBooking && <ReviewForm tourType={tourType} />}
+            <div className="mt-2 space-y-2 w-full">
+              {reviews.map((review) => (
+                <Comment key={review.id} review={review} />
+              ))}
+            </div>
+          </div>
+        )}
       </Container>
     </div>
   );

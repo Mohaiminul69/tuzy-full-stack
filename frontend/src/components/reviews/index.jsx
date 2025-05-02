@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import { destinationSlides } from "../../utils/mock-data/destinations-slider-data";
 import { Container } from "react-bootstrap";
+import { useGetAllReviewsQuery } from "../../api/reviews";
+import ReviewCard from "./review-card";
 import "./reviews.css";
 
 const Reviews = () => {
+  const { data: reviews = [] } = useGetAllReviewsQuery();
   useEffect(() => {
-    const sliderDiv = document.getElementById("cursor-slider");
+    const sliderDiv = document.getElementById("review-slider");
 
     if (!sliderDiv) return;
 
@@ -39,14 +41,9 @@ const Reviews = () => {
         <h1 className="fw-light text-uppercase mb-4 text-black">Reviews</h1>
         <div className="custom-horizontal-line hidden md:block" />
       </Container>
-      <div id="cursor-slider">
-        {destinationSlides.map(({ name, img_src }) => (
-          <a key={name} href="#">
-            <span>{name}</span>
-            <div className="img-wrapper">
-              <img src={img_src} alt="" />
-            </div>
-          </a>
+      <div id="review-slider">
+        {reviews.map((review) => (
+          <ReviewCard key={review.id} review={review} />
         ))}
       </div>
       <span className="text-xs text-center block text-gray-500 pb-4 lowercase">
