@@ -10,5 +10,6 @@ module V1
     mount V1::Packages
     mount V1::Users
     mount V1::Bookings
+    mount V1::Reviews
   end
 end

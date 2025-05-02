@@ -36,14 +36,14 @@ const formfields = [
 
 const BookingForm = () => {
   const [createBooking] = useCreateBookingMutation();
-  const { dataType, id } = useParams();
+  const { tourType, id } = useParams();
 
   return (
     <CreateUpdateForm
       title="book trip"
       formfields={formfields}
       callback={createBooking}
-      defaultValues={{ [`${dataType}_id`]: id }}
+      defaultValues={{ [`${tourType}_id`]: id }}
       alertText="your trip has been booked"
     />
   );

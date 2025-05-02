@@ -19,6 +19,21 @@ module V1
           }
         }
       end
+
+      desc "Get single user info"
+      params do
+        requires :id, type: Integer
+      end
+
+      get ':id' do
+        user = User.find_by(id: params[:id])
+
+        if user
+          { message: "User found successfully", user: user }
+        else
+          error!({ message: "User not found" }, 404)
+        end
+      end
       
       desc "Register a User"
 

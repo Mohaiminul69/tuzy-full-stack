@@ -5,26 +5,27 @@ import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import toastStyle from "../../../utils/taost-style";
 import { useCheckBookingQuery } from "../../../api/bookings";
+import ReviewForm from "../forms/review-form";
 import "./details.css";
 
-const DetailsPage = ({ callback, dataType }) => {
+const DetailsPage = ({ callback, tourType }) => {
+  const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
   const { id } = useParams();
-  const navigate = useNavigate();
-  const idType = `${dataType}_id`;
+  const idType = `${tourType}_id`;
 
   const { data: bookingStatus, isFetching: isBookingLoading } =
     useCheckBookingQuery({ [idType]: id }, { skip: !isLoggedIn });
   const hasBooking = bookingStatus?.has_booking;
 
   const { data, isFetching } = callback(id);
-  const viewData = data?.[dataType];
+  const viewData = data?.[tourType] || {};
 
   const onBooking = () => {
     if (!isLoggedIn) {
       toast.error("Please login first", toastStyle);
     }
-    navigate(`/book/${dataType}/${id}`);
+    navigate(`/book/${tourType}/${id}`);
   };
 
   if (isFetching || isBookingLoading) {
@@ -52,7 +53,7 @@ const DetailsPage = ({ callback, dataType }) => {
             <img src={img_src} alt="" />
           </Col>
           <Col sm={12} md={12} lg={8} className="mb-3">
-            <div className="details_card">
+            <div className="details-card">
               <h1 className="display-2">{name}</h1>
               <div>
                 {short_description && (
@@ -83,7 +84,7 @@ const DetailsPage = ({ callback, dataType }) => {
             </div>
           </Col>
         </Row>
-        {hasBooking && <h1 className="text-white">Review</h1>}
+        {hasBooking && <ReviewForm tourType={tourType} />}
       </Container>
     </div>
   );

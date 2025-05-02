@@ -12,6 +12,7 @@ module V1
         params do
           requires :id, type: Integer
         end
+
         get ':id' do
           destination = Destination.find_by(id: params[:id])
 
@@ -30,6 +31,7 @@ module V1
           requires :price, type: String
           requires :img_src, type: String
         end
+        
         post do
           destination = Destination.new({
             name: params[:name],

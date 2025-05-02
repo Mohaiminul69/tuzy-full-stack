@@ -3,7 +3,7 @@ import DetailsPage from "../shared/details-page";
 import { useGetSingleDestinationQuery } from "../../api/destinations";
 
 const DestinationDetails = () => (
-  <DetailsPage callback={useGetSingleDestinationQuery} dataType="destination" />
+  <DetailsPage callback={useGetSingleDestinationQuery} tourType="destination" />
 );
 
 export default DestinationDetails;

@@ -22,6 +22,9 @@ const users = apiSlice.injectEndpoints({
       query: () => "users/me",
       providesTags: ["User"],
     }),
+    getSingleUser: builder.query({
+      query: (id) => `users/${id}`,
+    }),
   }),
 });
 
@@ -29,4 +32,5 @@ export const {
   useUserRegisterMutation,
   useUserLoginMutation,
   useGetCurrentUserQuery,
+  useGetSingleUserQuery,
 } = users;
