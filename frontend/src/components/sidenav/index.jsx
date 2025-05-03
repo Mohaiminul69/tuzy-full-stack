@@ -1,24 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import useAuth from "../../hooks/useAuth";
+import SideNavItem from "./sidenav-item";
+import SidenavDropdown from "./sidenav-dropdown";
 import "./sidenav.css";
-
-const SideNavItem = ({ icon, name, link, onClick, className, extraIcon }) => (
-  <Link to={link}>
-    <div className={`sidenav-item ${className}`} onClick={onClick}>
-      <div className="sidenav-icon">{icon}</div>
-      <div className="flex justify-between w-full pr-[28px]">
-        <span>{name}</span>
-        {extraIcon && <span>{extraIcon}</span>}
-      </div>
-    </div>
-  </Link>
-);
 
 const Sidenav = ({ currentUser }) => {
   const { logout } = useAuth();
   const isAdmin = currentUser?.admin;
-  const [showOptions, setShowOptions] = useState(false);
 
   return (
     <div className="sidenav">
@@ -54,26 +42,30 @@ const Sidenav = ({ currentUser }) => {
               name="Manage All Orders"
               link="/manage-orders"
             />
-            <SideNavItem
+            <SidenavDropdown
               icon={<i className="fas fa-box"></i>}
-              name="add tour"
-              onClick={() => setShowOptions(!showOptions)}
-              extraIcon={
-                <i
-                  className={`fas fa-chevron-${showOptions ? "up" : "down"}`}
-                />
+              name="add tours"
+              options={
+                <>
+                  <SideNavItem name="destination" link="/destination/new" />
+                  <SideNavItem name="package" link="/package/new" />
+                  <SideNavItem name="gallary image" link="/gallary-image/new" />
+                </>
               }
             />
-            {showOptions && (
-              <>
-                <SideNavItem name="destination" link="/destination/new" />
-                <SideNavItem name="package" link="/package/new" />
-              </>
-            )}
-            <SideNavItem
+            <SidenavDropdown
               icon={<i className="fas fa-trash-alt"></i>}
               name="manage tours"
-              link="/manage-tours"
+              options={
+                <>
+                  <SideNavItem name="destination" link="/destination/delete" />
+                  <SideNavItem name="package" link="/package/delete" />
+                  <SideNavItem
+                    name="gallary image"
+                    link="/gallary-image/delete"
+                  />
+                </>
+              }
             />
           </>
         ) : (

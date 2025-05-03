@@ -30,14 +30,14 @@ export default function RoutesComponent() {
         <Route path="/destination/edit/:id" element={<DestinationForm />} />
         <Route path="/destination/delete" element={<DeleteDestination />} />
         <Route path="/package/edit/:id" element={<PackageForm />} />
+        <Route path="/gallary-image/new" element={<GallaryImageForm />} />
+        <Route path="/gallary-image/edit/:id" element={<GallaryImageForm />} />
       </Route>
       <Route element={<PublicRoute />}>
         <Route
           path="/destination/details/:id"
           element={<DestinationDetails />}
         />
-        <Route path="/gallary-image/new" element={<GallaryImageForm />} />
-        <Route path="/gallary-image/edit/:id" element={<GallaryImageForm />} />
         <Route path="/package/details/:id" element={<PackagesDetails />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
