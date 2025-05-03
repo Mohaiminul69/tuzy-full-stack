@@ -11,7 +11,7 @@ const Packages = () => {
 
   if (isFetching) {
     return (
-      <div className="bg-my-orders py-5">
+      <div className="bg-my-bookings py-5">
         <Container className="text-center">
           <Spinner animation="border" variant="danger" />;
         </Container>

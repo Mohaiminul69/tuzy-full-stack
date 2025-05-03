@@ -16,6 +16,7 @@ module V1
             email: @current_user.email,
             img_src: @current_user.img_src,
             date_of_birth: @current_user.date_of_birth,
+            admin: @current_user.admin,
           }
         }
       end
@@ -100,6 +101,7 @@ module V1
                 email: user.email,
                 date_of_birth: user.date_of_birth,
                 img_src: user.img_src,
+                admin: user.admin,
               },
             token: token
           }

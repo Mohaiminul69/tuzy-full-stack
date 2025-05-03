@@ -159,6 +159,16 @@ User.create!({
   password: 'asd123'
 })
 
+User.create!({
+  first_name: 'Admin',
+  last_name: 'User',
+  email: 'admin@gmail.com',
+  date_of_birth: '02/02/2000',
+  img_src: 'https://i.ibb.co.com/txDKxnp/pexels-yogendra-singh-3971608.jpg',
+  password: 'asd123',
+  admin: true
+})
+
 puts "✅ Seeded #{User.count} users"
 
 bookings = [

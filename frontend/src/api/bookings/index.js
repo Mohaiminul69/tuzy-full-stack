@@ -18,7 +18,15 @@ const bookingApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["Booking"],
     }),
+    getCurrentUsersBookings: builder.query({
+      query: () => "bookings/my_bookings",
+      providesTags: ["Booking"],
+    }),
   }),
 });
 
-export const { useCreateBookingMutation, useCheckBookingQuery } = bookingApi;
+export const {
+  useCreateBookingMutation,
+  useCheckBookingQuery,
+  useGetCurrentUsersBookingsQuery,
+} = bookingApi;

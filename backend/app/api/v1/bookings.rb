@@ -66,6 +66,19 @@ module V1
 
         { has_booking: has_booking }
       end
+
+      desc "Get current user bookings"
+      get :my_bookings do
+        authenticate_user!
+
+        my_bookings = Booking.where(user_id: @current_user.id)
+
+        if my_bookings
+          { message: "Booking retrived successful", bookings: my_bookings }
+        else
+          error!({ message: "Failed to get user bookings", errors: my_bookings.errors.full_messages }, 422)
+        end
+      end
     end
   end
 end

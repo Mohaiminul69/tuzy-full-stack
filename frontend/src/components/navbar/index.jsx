@@ -2,29 +2,20 @@ import React, { useEffect, useRef } from "react";
 import { Fragment } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import { useGetCurrentUserQuery } from "../../api/users";
 import useAuth from "../../hooks/useAuth";
 import "./navbar.css";
 
-const Header = () => {
+const Header = ({ currentUser, isDashboard }) => {
   const customNav = useRef(null);
-  const { user, isLoggedIn, logout } = useAuth();
-  const { data, refetch } = useGetCurrentUserQuery(undefined, {
-    skip: !isLoggedIn,
-  });
-
-  const currentUser = data?.user || user;
+  const { logout } = useAuth();
 
   useEffect(() => {
-    if (isLoggedIn) {
-      refetch();
-    }
-  }, [isLoggedIn, refetch]);
+    const backgroundColor = isDashboard ? "#1b1b1b" : "transparent";
+    customNav.current.style.background = backgroundColor;
 
-  useEffect(() => {
     const handleScroll = () =>
       (customNav.current.style.background =
-        window.scrollY > 70 ? "rgba(27, 27, 27, 0.95)" : "transparent");
+        window.scrollY > 70 ? "rgba(27, 27, 27, 0.95)" : backgroundColor);
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -54,19 +45,14 @@ const Header = () => {
             </NavLink>
             {currentUser?.email ? (
               <Fragment>
-                <NavLink className="nav-link" to="/destination/new">
-                  Add Destination
-                </NavLink>
-                <NavLink className="nav-link" to="/manage">
-                  Manage Bookings
-                </NavLink>
-                <NavLink className="nav-link" to="/myOrders">
-                  My Bookings
+                <NavLink className="nav-link" to="/dashboard">
+                  Dashboard
                 </NavLink>
                 <Button
                   className="ms-3 btn btn-danger btn-sm !font-bold !bg-[#a93939] hover:!bg-[#a93939]/80 !py-2 !px-4 !border-gray-900 !capitalize !rounded-sm"
                   onClick={logout}
                 >
+                  <i className="fas fa-sign-out-alt mr-2"></i>
                   Logout
                 </Button>
               </Fragment>

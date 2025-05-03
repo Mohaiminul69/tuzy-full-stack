@@ -66,7 +66,7 @@
   transition: 0.8s;
 }
 
-.bg-my-orders {
+.bg-my-bookings {
   align-items: center;
   color: white;
   display: flex;
@@ -79,7 +79,7 @@
     no-repeat center center/cover;
 }
 
-.bg-my-orders::after {
+.bg-my-bookings::after {
   background: rgba(0, 0, 0, 0.7);
   content: "";
   height: 100%;
@@ -91,7 +91,7 @@
   z-index: -1;
 }
 
-.order-view {
+.booking-view {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   color: white;
@@ -101,7 +101,7 @@
     0.125em 0.125em 0.25em rgb(0 0 0 / 25%);
 }
 
-.order-view img {
+.booking-view img {
   border-radius: 7px;
   height: 200px;
   object-fit: cover;
