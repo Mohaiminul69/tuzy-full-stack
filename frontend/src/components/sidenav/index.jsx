@@ -101,6 +101,11 @@ const Sidenav = ({ currentUser }) => {
               name="my bookings"
               link="/my-bookings"
             />
+            <SideNavItem
+              icon={<i className="far fa-comment-dots"></i>}
+              name="my reviews"
+              link="/my-reviews"
+            />
           </>
         )}
       </div>
