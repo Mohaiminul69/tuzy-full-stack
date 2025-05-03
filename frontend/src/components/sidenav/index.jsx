@@ -43,7 +43,7 @@ const Sidenav = ({ currentUser }) => {
               link="/manage-orders"
             />
             <SidenavDropdown
-              icon={<i className="fas fa-box"></i>}
+              icon={<i className="fas fa-plus"></i>}
               name="add tours"
               options={
                 <>
@@ -66,7 +66,7 @@ const Sidenav = ({ currentUser }) => {
               }
             />
             <SidenavDropdown
-              icon={<i className="fas fa-trash-alt"></i>}
+              icon={<i className="fas fa-edit"></i>}
               name="manage tours"
               options={
                 <>
