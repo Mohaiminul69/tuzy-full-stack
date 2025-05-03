@@ -38,8 +38,8 @@ const Sidenav = ({ currentUser }) => {
               link="/make-admin"
             />
             <SideNavItem
-              icon={<i className="fas fa-trash-alt"></i>}
-              name="Manage All Orders"
+              icon={<i className="fas fa-clipboard"></i>}
+              name="Manage bookings"
               link="/manage-orders"
             />
             <SidenavDropdown
@@ -47,9 +47,21 @@ const Sidenav = ({ currentUser }) => {
               name="add tours"
               options={
                 <>
-                  <SideNavItem name="destination" link="/destination/new" />
-                  <SideNavItem name="package" link="/package/new" />
-                  <SideNavItem name="gallary image" link="/gallary-image/new" />
+                  <SideNavItem
+                    className="bg-black/25"
+                    name="destination"
+                    link="/destination/new"
+                  />
+                  <SideNavItem
+                    className="bg-black/25"
+                    name="package"
+                    link="/package/new"
+                  />
+                  <SideNavItem
+                    className="bg-black/25"
+                    name="gallary image"
+                    link="/gallary-image/new"
+                  />
                 </>
               }
             />
@@ -58,9 +70,18 @@ const Sidenav = ({ currentUser }) => {
               name="manage tours"
               options={
                 <>
-                  <SideNavItem name="destination" link="/destination/delete" />
-                  <SideNavItem name="package" link="/package/delete" />
                   <SideNavItem
+                    className="bg-black/25"
+                    name="destination"
+                    link="/destination/delete"
+                  />
+                  <SideNavItem
+                    className="bg-black/25"
+                    name="package"
+                    link="/package/delete"
+                  />
+                  <SideNavItem
+                    className="bg-black/25"
                     name="gallary image"
                     link="/gallary-image/delete"
                   />
