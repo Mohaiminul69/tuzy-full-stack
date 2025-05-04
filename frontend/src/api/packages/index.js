@@ -17,6 +17,13 @@ const packages = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Package"],
     }),
+    deletePackage: builder.mutation({
+      query: (id) => ({
+        url: `packages/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Package"],
+    }),
   }),
 });
 
@@ -24,4 +31,5 @@ export const {
   useGetAllPackagesQuery,
   useCreatePackageMutation,
   useGetSinglePackageQuery,
+  useDeletePackageMutation,
 } = packages;

@@ -10,9 +10,12 @@ const AlertModal = ({ showAlert, closeAlert, alertText }) => {
       <Modal.Header closeButton>
         <Modal.Title className="text-success">{capitalizedAlert}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{capitalizedAlert} successfully</Modal.Body>
+      <Modal.Body>{capitalizedAlert} successfully!</Modal.Body>
       <Modal.Footer>
-        <Button variant="dark" onClick={closeAlert}>
+        <Button
+          className="btn btn-danger btn-sm !font-bold !bg-gray-800 hover:!bg-gray-700 !px-2 !border-gray-900 !capitalize"
+          onClick={closeAlert}
+        >
           Okay!
         </Button>
       </Modal.Footer>

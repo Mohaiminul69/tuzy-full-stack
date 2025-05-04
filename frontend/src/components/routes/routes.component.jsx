@@ -15,6 +15,7 @@ import NotFound from "../../pages/not-found/index.jsx";
 import Dashboard from "../../pages/dashboard/index.jsx";
 import PublicRoute from "./public-route.jsx";
 import MyBookings from "../../pages/my-bookings/index.jsx";
+import DeletePackage from "../tour-packages/delete-package.jsx";
 
 export default function RoutesComponent() {
   return (
@@ -31,6 +32,7 @@ export default function RoutesComponent() {
         <Route path="/destination/new" element={<DestinationForm />} />
         <Route path="/destination/edit/:id" element={<DestinationForm />} />
         <Route path="/destination/delete" element={<DeleteDestination />} />
+        <Route path="/package/delete" element={<DeletePackage />} />
         <Route path="/package/edit/:id" element={<PackageForm />} />
         <Route path="/gallary-image/new" element={<GallaryImageForm />} />
         <Route path="/gallary-image/edit/:id" element={<GallaryImageForm />} />

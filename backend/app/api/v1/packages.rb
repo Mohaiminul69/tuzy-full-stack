@@ -44,6 +44,26 @@ module V1
           error!({ message: "Failed to create package", error: package.errors.full_messages }, 422)
         end
       end
+
+      desc "Delete a package"
+      params do
+        requires :id, type: Integer
+      end
+
+      delete ':id' do
+        package = Package.find_by(id: params[:id])
+
+        if package
+          if package.destroy
+            status 200
+            { message: "Package deleted successfully" }
+          else
+            error!({ message: "Failed to delete package", errors: package.errors.full_messages }, 422)
+          end
+        else
+          error!({ message: "Package not found" }, 404)
+        end
+      end
     end
   end
 end
