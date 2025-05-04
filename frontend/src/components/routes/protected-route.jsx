@@ -6,7 +6,7 @@ import Header from "../navbar";
 import Footer from "../footer";
 import Sidenav from "../sidenav";
 
-const ProtectedRoute = ({ isDashboard }) => {
+const ProtectedRoute = ({ isDashboard, isAdminOnly }) => {
   const { user } = useAuth();
   const { data, isFetching } = useGetCurrentUserQuery();
   const currentUser = data?.user || user;
@@ -26,7 +26,9 @@ const ProtectedRoute = ({ isDashboard }) => {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  return (
+  return isAdminOnly && !currentUser.admin ? (
+    <Navigate to="/" replace state={{ from: location }} />
+  ) : (
     <>
       <Header currentUser={currentUser} isDashboard={isDashboard} />
       {isDashboard && <Sidenav currentUser={currentUser} />}

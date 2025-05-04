@@ -19,12 +19,14 @@ import MyBookings from "../../pages/my-bookings/index.jsx";
 export default function RoutesComponent() {
   return (
     <Routes>
-      <Route element={<ProtectedRoute isDashboard={false} />}>
+      <Route element={<ProtectedRoute />}>
         <Route path="/book/:tourType/:id" element={<BookingForm />} />
       </Route>
       <Route element={<ProtectedRoute isDashboard={true} />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/my-bookings" element={<MyBookings />} />
+      </Route>
+      <Route element={<ProtectedRoute isDashboard={true} isAdminOnly={true} />}>
         <Route path="/package/new" element={<PackageForm />} />
         <Route path="/destination/new" element={<DestinationForm />} />
         <Route path="/destination/edit/:id" element={<DestinationForm />} />
