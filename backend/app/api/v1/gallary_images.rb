@@ -40,6 +40,7 @@ module V1
             params do
                 requires :img_src, type: String
             end
+
             put ':id' do
                 gallary_image = GallaryImage.find_by(id: params[:id])
 
@@ -51,6 +52,25 @@ module V1
                     end
                 else
                     error!({ message: "Gallary image not found" }, 404)
+                end
+            end
+
+            desc "Delete a gallary image"
+            params do
+                requires :id, type: Integer
+            end
+
+            delete ':id' do
+                image = GallaryImage.find_by(id: params[:id])
+
+                if image
+                    if image.destroy
+                        { message: "Image deleted successfully" }
+                    else
+                        error!({ message: "Failed to delete image", errors: image.errors.full_messages }, 422)
+                    end
+                else
+                    error({ message: "Failed to find image" }, 404)
                 end
             end
         end

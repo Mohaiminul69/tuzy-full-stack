@@ -27,6 +27,13 @@ const gallaryImages = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["GallaryImage"],
     }),
+    deleteGallaryImage: builder.mutation({
+      query: (id) => ({
+        url: `gallary_images/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["GallaryImage"],
+    }),
   }),
 });
 
@@ -35,4 +42,5 @@ export const {
   useGetSingleGallaryImageQuery,
   useCreateGallaryImageMutation,
   useUpdateGallaryImageMutation,
+  useDeleteGallaryImageMutation,
 } = gallaryImages;
