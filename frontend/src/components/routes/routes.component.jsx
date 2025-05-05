@@ -17,6 +17,7 @@ import PublicRoute from "./public-route.jsx";
 import MyBookings from "../../pages/my-bookings/index.jsx";
 import DeletePackage from "../tour-packages/delete-package.jsx";
 import DeleteGallaryImage from "../gallary/delete-gallary-image.jsx";
+import UserProfile from "../../pages/user-profile/index.jsx";
 
 export default function RoutesComponent() {
   return (
@@ -25,6 +26,7 @@ export default function RoutesComponent() {
         <Route path="/book/:tourType/:id" element={<BookingForm />} />
       </Route>
       <Route element={<ProtectedRoute isDashboard={true} />}>
+        <Route path="/profile" element={<UserProfile />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/my-bookings" element={<MyBookings />} />
       </Route>

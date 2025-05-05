@@ -109,6 +109,30 @@ module V1
           error!({ message: "Invalid email or password" }, 401)
         end
       end
+
+      desc "Update user info"
+      params do
+        optional :first_name, type: String
+        optional :last_name, type: String
+        optional :email, type: String
+        optional :date_of_birth, type: String
+        optional :img_src, type: String
+      end
+
+      put :me do
+        authenticate_user!
+        
+        if @current_user
+          user = @current_user
+          if user.update(declared(params, include_missing: false))
+            { message: "Profile updated successfully", user: @current_user }
+          else
+            error!({ message: "Failed to update profile", errors: user.errors.full_messages }, 422)
+          end
+        else
+          error!({ message: "Unauthorized" }, 401)
+        end
+      end
     end
   end
 end

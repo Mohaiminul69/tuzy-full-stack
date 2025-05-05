@@ -24,6 +24,15 @@ const users = apiSlice.injectEndpoints({
     }),
     getSingleUser: builder.query({
       query: (id) => `users/${id}`,
+      providesTags: ["User"],
+    }),
+    updateCurrentUserInfo: builder.mutation({
+      query: ({ payload }) => ({
+        url: "users/me",
+        method: "PUT",
+        body: payload,
+      }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
@@ -33,4 +42,5 @@ export const {
   useUserLoginMutation,
   useGetCurrentUserQuery,
   useGetSingleUserQuery,
+  useUpdateCurrentUserInfoMutation,
 } = users;

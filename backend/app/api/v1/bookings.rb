@@ -3,7 +3,7 @@ module V1
     format :json
 
     before do
-      authenticate_user!  # Call the authenticate_user! method to ensure the user is authenticated
+      authenticate_user!
     end
 
     resource :bookings do

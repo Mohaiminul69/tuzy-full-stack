@@ -191,15 +191,7 @@ bookings = [
 ]
 
 bookings.each do |booking|
-  Booking.create!({
-    phone_number: booking[:phone_number],
-    address: booking[:address],
-    credit_card_number: booking[:credit_card_number],
-    booking_date: booking[:booking_date],
-    destination_id: booking[:destination_id],
-    package_id: booking[:package_id],
-    user_id: booking[:user_id]
-  })
+  Booking.create!(booking)
 end
 
 puts "✅ Seeded #{Booking.count} bookings"
