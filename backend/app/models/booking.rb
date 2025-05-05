@@ -3,6 +3,8 @@ class Booking < ApplicationRecord
   belongs_to :destination, optional: true
   belongs_to :package, optional: true
 
+  enum :status, { pending: 0, approved: 1, cancelled: 2 }
+
   validates :phone_number, presence: true
   validates :address, presence: true
   validates :credit_card_number, presence: true
