@@ -40,7 +40,7 @@ const Sidenav = ({ currentUser }) => {
             <SideNavItem
               icon={<i className="fas fa-clipboard"></i>}
               name="Manage bookings"
-              link="/manage-orders"
+              link="/manage-bookings"
             />
             <SidenavDropdown
               icon={<i className="fas fa-plus"></i>}

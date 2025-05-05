@@ -18,6 +18,7 @@ import MyBookings from "../../pages/my-bookings/index.jsx";
 import DeletePackage from "../tour-packages/delete-package.jsx";
 import DeleteGallaryImage from "../gallary/delete-gallary-image.jsx";
 import UserProfile from "../../pages/user-profile/index.jsx";
+import BookingList from "../bookings/list.jsx";
 
 export default function RoutesComponent() {
   return (
@@ -40,6 +41,7 @@ export default function RoutesComponent() {
         <Route path="/package/edit/:id" element={<PackageForm />} />
         <Route path="/gallary-image/new" element={<GallaryImageForm />} />
         <Route path="/gallary-image/edit/:id" element={<GallaryImageForm />} />
+        <Route path="/manage-bookings" element={<BookingList />} />
       </Route>
       <Route element={<PublicRoute />}>
         <Route

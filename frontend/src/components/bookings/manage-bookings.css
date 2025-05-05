@@ -1,0 +1,28 @@
+.manage-booking-page {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+
+  background: url("https://i.ibb.co.com/xFLfW7X/pexels-jahoo-clouseau-382177.jpg")
+    no-repeat center center/cover;
+}
+
+.manage-booking-page::after {
+  background: rgba(0, 0, 0, 0.7);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: 0.5s;
+  width: 100%;
+  z-index: -1;
+}
+
+.manage-booking-page img {
+  box-shadow: 0.25em 0.25em 0.75em rgb(0 0 0 / 55%),
+    0.125em 0.125em 0.25em rgb(0 0 0 / 25%);
+}
