@@ -19,16 +19,20 @@ const GallaryImageForm = () => {
   const { id } = useParams();
   const [createGallaryImage] = useCreateGallaryImageMutation();
   const [updateGallaryImage] = useUpdateGallaryImageMutation();
-  const { data } = useGetSingleGallaryImageQuery(id);
+  const { data = {} } = useGetSingleGallaryImageQuery(id, {
+    skip: !id,
+  });
   const callback = id ? updateGallaryImage : createGallaryImage;
+  const title = id ? "update gallary image" : "add gallary image";
+  const alertText = id ? "gallary image updated" : "gallary image added";
 
   return (
     <CreateUpdateForm
-      title="add gallary image"
+      title={title}
       formfields={formfields}
       callback={callback}
       defaultValues={data?.gallary_image}
-      alertText="image added"
+      alertText={alertText}
     />
   );
 };

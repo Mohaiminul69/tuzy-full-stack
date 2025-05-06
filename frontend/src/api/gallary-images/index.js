@@ -9,6 +9,7 @@ const gallaryImages = apiSlice.injectEndpoints({
     getSingleGallaryImage: builder.query({
       query: (id) => ({
         url: `gallary_images/${id}`,
+        providesTags: ["GallaryImage"],
       }),
     }),
     createGallaryImage: builder.mutation({

@@ -39,7 +39,9 @@ const DestinationForm = () => {
   const { id } = useParams();
   const [createDestination] = useCreateDestinationMutation();
   const [updateDestination] = useUpdateDestinationMutation();
-  const { data = null } = useGetSingleDestinationQuery(id);
+  const { data = {} } = useGetSingleDestinationQuery(id, {
+    skip: !id,
+  });
   const callback = id ? updateDestination : createDestination;
   const title = id ? "update destination" : "add destination";
   const alertText = id ? "destination updated" : "destination added";

@@ -79,6 +79,34 @@ module V1
           error!({ message: "Failed to get user bookings", errors: my_bookings.errors.full_messages }, 422)
         end
       end
+
+      desc "Update a booking"
+      params do
+        requires :id, type: Integer
+        optional :phone_number, type: String
+        optional :address, type: String
+        optional :credit_card_number, type: String
+        optional :booking_date, type: String
+        optional :destination_id, type: Integer
+        optional :package_id, type: Integer
+        optional :status, type: String
+      end
+
+      put ':id' do
+        authenticate_user!
+
+        booking = Booking.find_by(id: params[:id])
+
+        if booking.nil?
+          error!({ message: "Booking not found" }, 404)
+        end
+
+        if booking.update(declared(params, include_missing: false).except(:id))
+          { message: "Booking updated successfully", booking: booking }
+        else
+          error!({ message: "Failed to update booking", errors: booking.errors.full_messages }, 422)
+        end
+      end
     end
   end
 end

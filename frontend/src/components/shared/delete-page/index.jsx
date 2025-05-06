@@ -25,7 +25,7 @@ const DeletePage = ({
     setShowConfirmModal(true);
   };
 
-  const handleOrderDelete = (id) => {
+  const handleTourDelete = (id) => {
     setShowConfirmModal(false);
     deleteEntity(id)
       .unwrap()
@@ -63,7 +63,7 @@ const DeletePage = ({
         )}
       </Container>
       <ConfirmModal
-        handleOrderDelete={handleOrderDelete}
+        handleTourDelete={handleTourDelete}
         show={showConfirmModal}
         handleClose={() => setShowConfirmModal(false)}
         entityId={selectedId}

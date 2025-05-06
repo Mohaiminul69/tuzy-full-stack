@@ -16,19 +16,18 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   const result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    // Token is invalid/expired
-    localStorage.removeItem("token"); // Remove bad token
+    localStorage.removeItem("token");
     toast.error("Session expired. Please log in again.");
     setTimeout(() => {
       window.location.href = "/login";
-    }, 2000); // 2 second delay
+    }, 2000);
   }
 
   return result;
 };
 
 export const apiSlice = createApi({
-  reducerPath: "api", // optional, just the key in your store
+  reducerPath: "api",
   baseQuery: baseQueryWithReauth,
   refetchOnReconnect: true,
   tagTypes: ["Destination", "GallaryImage", "User"],

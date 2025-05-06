@@ -64,6 +64,30 @@ module V1
           error!({ message: "Package not found" }, 404)
         end
       end
+
+      desc "Update a package"
+      params do
+        requires :id, type: Integer
+        optional :name, type: String
+        optional :description, type: String
+        optional :short_description, type: String
+        optional :price, type: String
+        optional :img_src, type: String
+      end
+
+      put ':id' do
+        package = Package.find_by(id: params[:id])
+
+        if package
+          if package.update(declared(params, include_missing: false).except(:id))
+            { message: "Package updated successfully", package: package }
+          else
+            error!({ message: "Failed to update the package", errors: package.errors.full_messages },  422)
+          end
+        else
+          error!({ message: "Package not found" }, 404)
+        end
+      end
     end
   end
 end

@@ -56,6 +56,7 @@ module V1
           optional :price, type: String
           optional :img_src, type: String
         end
+        
         put ':id' do
           destination = Destination.find_by(id: params[:id])
 

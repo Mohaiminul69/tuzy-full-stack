@@ -9,7 +9,7 @@ const ConfirmModal = (props) => {
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
         <Modal.Title className="text-danger">
-          <i class="fas fa-skull mr-2"></i>
+          <i className="fas fa-skull mr-2"></i>
           {confirmTitle}
         </Modal.Title>
       </Modal.Header>

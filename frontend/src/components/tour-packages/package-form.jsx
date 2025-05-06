@@ -1,7 +1,12 @@
 import React from "react";
-import { useCreatePackageMutation } from "../../api/packages";
+import {
+  useCreatePackageMutation,
+  useGetSinglePackageQuery,
+  useUpdatePackageMutation,
+} from "../../api/packages";
 import CreateUpdateForm from "../shared/forms/create-update-form";
 import { useParams } from "react-router-dom";
+import { Container, Spinner } from "react-bootstrap";
 
 const formfields = [
   {
@@ -28,16 +33,22 @@ const formfields = [
 
 const PackageForm = () => {
   const [createPackage] = useCreatePackageMutation();
+  const [updatePackage] = useUpdatePackageMutation();
   const { id } = useParams();
   const alertText = id ? "package updated" : "package added";
   const title = id ? "update package" : "add package";
+  const callback = id ? updatePackage : createPackage;
+  const { data = {} } = useGetSinglePackageQuery(id, {
+    skip: !id,
+  });
 
   return (
     <CreateUpdateForm
       title={title}
       formfields={formfields}
-      callback={createPackage}
+      callback={callback}
       alertText={alertText}
+      defaultValues={data?.package}
     />
   );
 };

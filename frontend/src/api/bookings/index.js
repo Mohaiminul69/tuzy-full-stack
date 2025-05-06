@@ -26,6 +26,14 @@ const bookingApi = apiSlice.injectEndpoints({
       query: () => "bookings/my_bookings",
       providesTags: ["Booking"],
     }),
+    updateBooking: builder.mutation({
+      query: ({ id, payload }) => ({
+        url: `bookings/${id}`,
+        method: "PUT",
+        body: payload,
+      }),
+      invalidatesTags: ["Booking"],
+    }),
   }),
 });
 
@@ -34,4 +42,5 @@ export const {
   useCheckBookingQuery,
   useGetCurrentUsersBookingsQuery,
   useGetAllBookingsQuery,
+  useUpdateBookingMutation,
 } = bookingApi;

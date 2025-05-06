@@ -21,7 +21,7 @@ const MyBookings = () => {
 
   return (
     <div className="bg-my-bookings py-5">
-      <h1 className="display-2 my-5">My Orders</h1>
+      <h1 className="display-2 my-5">My Bookings</h1>
       <Container>
         {bookings.length === 0 ? (
           <h1 className="fw-light">You dont have any pending bookings !</h1>

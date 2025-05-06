@@ -1,26 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AlertModal from "../modals/alert-modal";
 import useAuth from "../../../hooks/useAuth";
 import "./form.css";
 
-const CreateUpdateForm = ({
-  title,
-  showManageButton,
-  formfields,
-  callback,
-  defaultValues,
-  alertText,
-}) => {
+const CreateUpdateForm = (props) => {
+  const { title, formfields, callback, defaultValues, alertText } = props;
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues });
+
+  useEffect(() => {
+    if (defaultValues) {
+      reset(defaultValues);
+    }
+  }, [defaultValues, reset]);
+
   const { id } = useParams();
   const formSubtitle = `Please fill up the form to ${title}`;
   const navigate = useNavigate();
@@ -56,27 +57,18 @@ const CreateUpdateForm = ({
       });
   };
 
-  // if (false) return "Hello Loader";
-
   return (
     <div className="bg-form py-5 bg-black h-screen">
       <h1 className="display-3 mt-5 capitalize">{title}</h1>
       <Container className="mt-2">
         <Row>
-          <Col sm={12} md={3}>
-            {showManageButton && (
-              <Link to="/deleteTour">
-                <button className="btn btn-danger">Manage All Tours</button>
-              </Link>
-            )}
-          </Col>
+          <Col sm={12} md={3}></Col>
           <Col sm={12} md={6}>
             <form onSubmit={handleSubmit(onSubmit)} className="add-tour-form">
               <h6 className="fw-light fs-5 mb-4">{formSubtitle}</h6>
               {formfields.map(({ fieldName, placeholder, label, hidden }) =>
                 hidden ? (
                   <input
-                    defaultValue={defaultValues?.[fieldName]}
                     hidden={hidden}
                     {...register(fieldName, { required: id ? false : true })}
                   />
@@ -89,7 +81,6 @@ const CreateUpdateForm = ({
                       {label}*
                     </label>
                     <input
-                      defaultValue={defaultValues?.[fieldName]}
                       hidden={hidden}
                       {...register(fieldName, { required: id ? false : true })}
                       placeholder={placeholder}

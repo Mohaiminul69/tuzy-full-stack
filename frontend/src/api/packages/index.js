@@ -8,6 +8,7 @@ const packages = apiSlice.injectEndpoints({
     }),
     getSinglePackage: builder.query({
       query: (id) => `packages/${id}`,
+      providesTags: ["Package"],
     }),
     createPackage: builder.mutation({
       query: ({ payload }) => ({
@@ -24,6 +25,14 @@ const packages = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Package"],
     }),
+    updatePackage: builder.mutation({
+      query: ({ payload, id }) => ({
+        url: `packages/${id}`,
+        method: "PUT",
+        body: payload,
+      }),
+      invalidatesTags: ["Package"],
+    }),
   }),
 });
 
@@ -32,4 +41,5 @@ export const {
   useCreatePackageMutation,
   useGetSinglePackageQuery,
   useDeletePackageMutation,
+  useUpdatePackageMutation,
 } = packages;
