@@ -82,8 +82,11 @@ export const updateImages = (imageNumber) => {
   imgTop.style.transform = "scale(2)";
   imgBottom.style.transform = "scale(2)";
 
-  document.querySelector(".img-top").appendChild(imgTop);
-  document.querySelector(".img-bottom").appendChild(imgBottom);
+  const imgTopContainer = document.querySelector(".img-top");
+  const imgBottomContainer = document.querySelector(".img-bottom");
+
+  if (imgTopContainer) imgTopContainer.appendChild(imgTop);
+  if (imgBottomContainer) imgBottomContainer.appendChild(imgBottom);
 
   gsap.to([imgTop, imgBottom], {
     clipPath: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
@@ -100,12 +103,14 @@ const trimExcessImages = () => {
 
   selectors.forEach((selector) => {
     const container = document.querySelector(selector);
-    const images = Array.from(container.querySelectorAll(".img"));
-    const exessCount = images.length - 7;
+    if (!container) return;
 
-    if (exessCount > 0) {
+    const images = Array.from(container.querySelectorAll(".img"));
+    const excessCount = images.length - 7;
+
+    if (excessCount > 0) {
       images
-        .slice(0, exessCount)
+        .slice(0, excessCount)
         .forEach((image) => container.removeChild(image));
     }
   });

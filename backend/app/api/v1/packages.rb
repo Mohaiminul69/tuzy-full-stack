@@ -27,6 +27,7 @@ module V1
         requires :name, type: String
         requires :price, type: String
         requires :description, type: String
+        requires :short_description, type: String
         requires :img_src, type: String
       end
 
@@ -35,6 +36,7 @@ module V1
           name: params[:name],
           price: params[:price],
           description: params[:description],
+          short_description: params[:short_description],
           img_src: params[:img_src]
         })
 

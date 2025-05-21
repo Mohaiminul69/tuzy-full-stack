@@ -25,6 +25,11 @@ const formfields = [
     placeholder: "Please enter image URL",
   },
   {
+    fieldName: "short_description",
+    label: "short description",
+    placeholder: "Please enter a short description about the package",
+  },
+  {
     fieldName: "img_src",
     label: "image source",
     placeholder: "Please enter image URL",

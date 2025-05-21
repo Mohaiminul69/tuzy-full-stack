@@ -36,6 +36,7 @@ module V1
           destination = Destination.new({
             name: params[:name],
             description: params[:description],
+            short_description: params[:short_description],
             price: params[:price],
             img_src: params[:img_src]
           })

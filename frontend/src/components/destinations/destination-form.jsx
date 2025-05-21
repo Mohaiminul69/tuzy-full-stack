@@ -19,14 +19,14 @@ const formfields = [
     placeholder: "Please enter destination price",
   },
   {
-    fieldName: "short_description",
-    label: "short description",
-    placeholder: "Please enter a short description about the destination",
-  },
-  {
     fieldName: "description",
     label: "description",
     placeholder: "Please enter a details about the destination",
+  },
+  {
+    fieldName: "short_description",
+    label: "short description",
+    placeholder: "Please enter a short description about the destination",
   },
   {
     fieldName: "img_src",
