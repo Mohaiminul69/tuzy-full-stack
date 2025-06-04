@@ -92,6 +92,7 @@ module V1
 
         if user&.authenticate(params[:password])
           token = JwtService.encode(user_id: user.id)
+          status 200
           { 
             user:
               {

@@ -18,7 +18,7 @@ module V1
         if package
           { message: "Package found successfully", package: package }
         else
-          error!({ message: "Package not found", errors: package.errors.full_messages }, 422)
+          error!({ message: "Package not found" }, 404)
         end
       end
 

@@ -2,29 +2,43 @@
 require 'rails_helper'
 
 RSpec.describe 'Destinations API', type: :request do
-  let!(:destination) { Destination.create(name: 'Paris', description: 'City of Light', short_description: 'Romantic city', price: '1000', img_src: 'paris.jpg') }
+  let!(:destination) { create(:destination) }
 
   describe 'GET /destinations' do
     it 'returns all destinations' do
       get '/api/destinations'
-      expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body).first['name']).to eq('Paris')
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body.first).to include(
+        'name' => 'Paris',
+        'description' => 'City of Light',
+        'short_description' => 'Romantic city',
+        'price' => '1200',
+        'img_src' => 'paris.jpg'
+      )
     end
   end
 
   describe 'GET /destinations/:id' do
-    it 'returns the destination' do
+    it 'returns the specific destination with given id' do
       get "/api/destinations/#{destination.id}"
-      expect(response).to have_http_status(:ok)
-      json = JSON.parse(response.body)
-      expect(json['destination']['name']).to eq('Paris')
+
+      expect(response.status).to eq(200)
+      json = response.parsed_body
+      expect(response.parsed_body['destination']).to include(
+        'name' => 'Paris',
+        'description' => 'City of Light',
+        'short_description' => 'Romantic city',
+        'price' => '1200',
+        'img_src' => 'paris.jpg'
+      )
     end
 
-    it 'returns 404 if not found' do
+    it 'returns 404 if destination with the give id is not found' do
       get "/api/destinations/9999"
-      expect(response).to have_http_status(404)
-      json = JSON.parse(response.body)
-      expect(json['message']).to eq('Destination not found')
+
+      expect(response.status).to eq(404)
+      expect(response.parsed_body['message']).to eq('Destination not found')
     end
   end
 
@@ -43,45 +57,54 @@ RSpec.describe 'Destinations API', type: :request do
   
     it 'creates a destination' do
       post '/api/destinations', params: valid_params.to_json, headers: headers
-      expect(response).to have_http_status(:created)
-      json = JSON.parse(response.body)
+
+      expect(response.status).to eq(201)
+      json = response.parsed_body
       expect(json['message']).to eq('Destination created successfully')
-      expect(json['destination']['name']).to eq('Tokyo')
+      expect(json['destination']).to include({
+        'name' => 'Tokyo',
+        'description' => 'Beautiful city',
+        'short_description' => 'Culture and tech',
+        'price' => '1500',
+        'img_src' => 'tokyo.jpg'
+      })
     end
   
-    it 'returns 422 for invalid input' do
+    it 'returns 422 for invalid inputs' do
       post '/api/destinations', params: valid_params.except(:name).to_json, headers: headers
-      expect(response).to have_http_status(400)
-      json = JSON.parse(response.body)
-      expect(json['error']).to eq('name is missing')
+
+      expect(response.status).to eq(400)
+      expect(response.parsed_body['error']).to eq('name is missing')
     end
   end
 
   describe 'PUT /destinations/:id' do
     it 'updates the destination' do
       put "/api/destinations/#{destination.id}", params: { name: 'New Paris' }
-      expect(response).to have_http_status(:ok)
-      json = JSON.parse(response.body)
-      expect(json['destination']['name']).to eq('New Paris')
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body['destination']['name']).to eq('New Paris')
     end
 
-    it 'returns 404 for missing record' do
+    it 'returns 404 for if no record with the given id is found' do
       put "/api/destinations/9999", params: { name: 'Nowhere' }
-      expect(response).to have_http_status(404)
+
+      expect(response.status).to eq(404)
     end
   end
 
   describe 'DELETE /destinations/:id' do
     it 'deletes the destination' do
       delete "/api/destinations/#{destination.id}"
-      expect(response).to have_http_status(:ok)
-      json = JSON.parse(response.body)
-      expect(json['message']).to eq('Destination deleted successfully')
+
+      expect(response.status).to eq(200)
+      expect(response.parsed_body['message']).to eq('Destination deleted successfully')
     end
 
-    it 'returns 404 for missing record' do
+    it 'returns 404 for if no record with the given id is found' do
       delete "/api/destinations/9999"
-      expect(response).to have_http_status(404)
+
+      expect(response.status).to eq(404)
     end
   end
 end

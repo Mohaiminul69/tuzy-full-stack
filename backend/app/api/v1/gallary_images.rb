@@ -70,7 +70,7 @@ module V1
                         error!({ message: "Failed to delete image", errors: image.errors.full_messages }, 422)
                     end
                 else
-                    error({ message: "Failed to find image" }, 404)
+                    error!({ message: "Failed to find image" }, 404)
                 end
             end
         end
